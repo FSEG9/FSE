@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cfd94849-9cf5-4209-b3b2-e8f4183e4645" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/bundles/apexcharts.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/bundles/dataTables.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/bundles/libscripts.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/bundles/nestable.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/my-task.style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/icofont/fonts/icofont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/icofont/fonts/icofont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/icofont/fonts/icofont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/icofont/fonts/icofont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/gallery/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/gallery/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/interview.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lg/avatar9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/profile_av.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/task-view.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/xs/avatar9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/page/hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/page/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/page/task.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/template.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/datatables/dataTables.bootstrap5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/datatables/responsive.dataTables.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/fullcalendar/main.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/fullcalendar/main.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/nestable/jquery-nestable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/prism/prism.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plugin/prism/prism.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1u4mhc0iXUqSrt4R6XoSDWjNAcg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cfd94849-9cf5-4209-b3b2-e8f4183e4645" name="Default Changelist" comment="" />
+      <created>1623933355972</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623933355972</updated>
+      <workItem from="1623933357520" duration="794000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
