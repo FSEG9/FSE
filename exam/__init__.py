@@ -24,3 +24,6 @@ def main():
 <a href="{{ url_for('view_exam.home') }}">学生考试查看</a><br />
 <a href="{{ url_for('take_exam.home') }}">学生参与考试</a><br />  
 ''')
+
+
+from exam.commands import initdb

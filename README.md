@@ -38,6 +38,14 @@ PyPI (pip) 换源：
 
 [从国内的 PyPI 镜像（源）安装 Python 包](https://zhuanlan.zhihu.com/p/57872888)
 
+## 数据库
+
+初始化数据库：
+
+```bash
+flask initdb --drop
+```
+
 ## 网页目录结构
 
 ```bash

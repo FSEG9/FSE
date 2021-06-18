@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <!-- project css file  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my-task.style.css') }}">
+</head>
+<body>
+
+<div id="mytask-layout" class="theme-indigo">
+
+    {% include '_sidebar.html' %}
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        {% include '_header.html' %}
+
+        {% block content %}{% endblock %}
+
+    </div>
+</div>
+
+</body>
+</html>
