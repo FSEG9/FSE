@@ -106,6 +106,6 @@ exam/
 
 ```python
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@localhost:3306/fse-exam'  # 换成自己的数据库地址
+SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@localhost:3306/fse_exam'  # 换成自己的数据库地址
 SECRET_KEY = 'ca0ea394f434482a832976508446c227'
 ```

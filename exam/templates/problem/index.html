@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}教师题库管理{% endblock %}
+
+{% block content %}
+
+    <p>
+        <a href="{{ url_for('problem.add_problem') }}">添加题目</a>
+    </p>
+
+    <table>
+        <tr>
+            <th>编号</th>
+            <th>类型</th>
+            <th>题干</th>
+            <th>标签</th>
+            <th>引用次数</th>
+            <th>操作</th>
+        </tr>
+        {% if not problems %}
+            <tr>
+                <td colspan="6">无题目</td>
+            </tr>
+        {% else %}
+            {% for problem in problems %}
+                <tr>
+                    <td>{{ problem.problem_id }}</td>
+                    <td>
+                        {% if problem.type == 0 %}判断{% endif %}
+                        {% if problem.type == 1 %}单选{% endif %}
+                        {% if problem.type == 2 %}多选{% endif %}
+                    </td>
+                    <td>{{ problem.text | truncate(20) }}</td>
+                    <td>
+                        {% for tag in problem.tags %}
+                            <span>{{ tag.tag_name }}</span>
+                        {% endfor %}
+                    </td>
+                    <td>0</td> {# TODO: 添加引用次数 #}
+                    <td>
+                        <a href="{{ url_for('problem.edit_problem', problem_id=problem.problem_id) }}">修改</a>
+                        <a href="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+
+
+{% endblock %}
