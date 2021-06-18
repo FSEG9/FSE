@@ -1,7 +1,8 @@
 from exam import db
 
-
 # 题库
+from exam.models.exam import exam_has_problem
+
 problem_has_tag = db.Table(
     'problem_has_tag',
     db.Column('problem_id', db.Integer, db.ForeignKey('problem.problem_id')),
@@ -11,7 +12,7 @@ problem_has_tag = db.Table(
 
 class Problem(db.Model):
     problem_id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.Integer, nullable=False) # 0, 1, 2: 判断，单选，多选
+    type = db.Column(db.Integer, nullable=False)  # 0, 1, 2: 判断，单选，多选
     text = db.Column(db.Text, nullable=False)
     choice_A = db.Column(db.String(200))
     choice_B = db.Column(db.String(200))
@@ -22,6 +23,9 @@ class Problem(db.Model):
     tags = db.relationship('Tag',
                            secondary=problem_has_tag,
                            back_populates='problems')
+    papers = db.relationship('Paper',
+                             secondary=exam_has_problem,
+                             back_populates='problems')
 
 
 class Tag(db.Model):

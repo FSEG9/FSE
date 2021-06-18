@@ -1,7 +1,7 @@
 from flask import Flask, render_template_string
 from flask_sqlalchemy import SQLAlchemy
-
-
+import pymysql
+pymysql.install_as_MySQLdb()
 app = Flask('exam')
 app.config.from_pyfile('settings.py')
 
