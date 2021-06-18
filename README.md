@@ -11,7 +11,7 @@
 
 ```bash
 python -m venv env
-env\Scripts\activate
+venv\Scripts\activate
 ```
 
 从依赖列表中安装依赖：
