@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, HiddenField, RadioField, SubmitField, FieldList
+from wtforms import StringField, TextAreaField, HiddenField, SelectField, SubmitField
 from wtforms.validators import ValidationError
 
 
@@ -55,8 +55,8 @@ def check_solution(message=None):
 
 
 class ProblemForm(FlaskForm):
-    type = RadioField('题目类型', choices=[('0', '判断'), ('1', '单选'), ('2', '多选')],
-                      validators=[problem_type_not_empty()])
+    type = SelectField('题目类型', choices=[('0', '判断'), ('1', '单选'), ('2', '多选')],
+                       validators=[problem_type_not_empty()])
     text = TextAreaField('题干', validators=[text_not_empty()])
     choice_A = StringField('选项 A', validators=[check_has_choice()])
     choice_B = StringField('选项 B', validators=[check_has_choice()])

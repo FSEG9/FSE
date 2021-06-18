@@ -4,47 +4,73 @@
 
 {% block content %}
 
-    <p>
-        <a href="{{ url_for('problem.add_problem') }}">添加题目</a>
-    </p>
+    <div class="body d-flex py-lg-3 py-md-2">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="border-0 mb-4">
+                    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                        <h3 class="fw-bold mb-0">我管理的试题</h3>
+                        <div class="col-auto d-flex w-sm-100">
+                            <a href="{{ url_for('problem.add_problem') }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-plus-circle me-2 fs-6"></i>新建试题</a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Row end  -->
+            <div class="row clearfix g-3">
+                <div class="col-sm-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>类型</th>
+                                        <th>题干</th>
+                                        <th>标签</th>
+                                        <th>引用次数</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-    <table>
-        <tr>
-            <th>编号</th>
-            <th>类型</th>
-            <th>题干</th>
-            <th>标签</th>
-            <th>引用次数</th>
-            <th>操作</th>
-        </tr>
-        {% if not problems %}
-            <tr>
-                <td colspan="6">无题目</td>
-            </tr>
-        {% else %}
-            {% for problem in problems %}
-                <tr>
-                    <td>{{ problem.problem_id }}</td>
-                    <td>
-                        {% if problem.type == 0 %}判断{% endif %}
-                        {% if problem.type == 1 %}单选{% endif %}
-                        {% if problem.type == 2 %}多选{% endif %}
-                    </td>
-                    <td>{{ problem.text | truncate(20) }}</td>
-                    <td>
-                        {% for tag in problem.tags %}
-                            <span>{{ tag.tag_name }}</span>
-                        {% endfor %}
-                    </td>
-                    <td>0</td> {# TODO: 添加引用次数 #}
-                    <td>
-                        <a href="{{ url_for('problem.edit_problem', problem_id=problem.problem_id) }}">修改</a>
-                        <a href="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}">删除</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-    </table>
+                                {% if not problems %}
+                                    <tr>
+                                        <td colspan="6">无题目</td>
+                                    </tr>
+                                {% else %}
+                                    {% for problem in problems %}
+                                        <tr>
+                                            <td><span class="fw-bold">{{ problem.problem_id }}</span></td>
+                                            <td>
+                                                {% if problem.type == 0 %}判断{% endif %}
+                                                {% if problem.type == 1 %}单选{% endif %}
+                                                {% if problem.type == 2 %}多选{% endif %}
+                                            </td>
+                                            <td>{{ problem.text | truncate(25) }}</td>
+                                            <td>
+                                                {% for tag in problem.tags %}
+                                                    <span class="badge bg-success">{{ tag.tag_name }}</span>
+                                                {% endfor %}
+                                            </td>
+                                            <td>0</td> {# TODO: 添加引用次数 #}
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <a href="{{ url_for('problem.edit_problem', problem_id=problem.problem_id) }}" class="btn btn-outline-secondary"><i class="icofont-edit text-success"></i></a>
+                                                    <a href="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}" class="btn btn-outline-secondary"><i class="icofont-ui-delete text-danger"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Row End -->
+        </div>
+    </div>
 
 
 {% endblock %}
