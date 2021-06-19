@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+
+    {% block plugin_css %}{% endblock %}
     <!-- project css file  -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/my-task.style.css') }}">
+
 </head>
 <body>
 
@@ -29,8 +32,12 @@
 <!-- Jquery Core Js -->
 <script src="{{ url_for('static', filename='bundles/libscripts.bundle.js') }}"></script>
 
+{% block plugin_js %}{% endblock %}
+
 <!-- Jquery Page Js -->
 <script src="{{ url_for('static', filename='js/template.js') }}"></script>
+
+{% block custom_js %}{% endblock %}
 
 </body>
 </html>

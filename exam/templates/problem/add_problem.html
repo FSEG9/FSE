@@ -4,73 +4,67 @@
 
 {% block content %}
 
+{#<!-- Edit Department-->#}
+{#<form method="post">#}
+{#    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">#}
+{#    <div class="modal-content">#}
+{#        <div class="modal-header">#}
+{#            <h5 class="modal-title  fw-bold" id="depeditLabel">添加题目</h5>#}
+{#            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#        </div>#}
+{#        <div class="modal-body">#}
+{#            {{ form.csrf_token }}#}
+{#            <div class="mb-2">#}
+{#                {{ form.type.label(class="form-label") }}#}
+{#                {{ form.type(class="form-control") }}#}
+{#                {% for message in form.type.errors %}#}
+{#                    <div class="small text-primary">{{ message }}</div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div class="mb-2">#}
+{#                {{ form.text.label(class="form-label") }}#}
+{#                {{ form.text(class="form-control") }}#}
+{#                {% for message in form.text.errors %}#}
+{#                    <div class="small text-primary">{{ message }}</div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div class="deadline-form">#}
+{#                <form>#}
+{#                    <div class="row g-3 mb-3">#}
+{#                        <div class="col-sm-6">#}
+{#                            <label class="form-label">Department Head</label>#}
+{#                            <select class="form-select">#}
+{#                                <option selected>Joan Dyer</option>#}
+{#                                <option value="1">Ryan Randall</option>#}
+{#                                <option value="2">Phil Glover</option>#}
+{#                                <option value="3">Victor Rampling</option>#}
+{#                                <option value="4">Sally Graham</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                        <div class="col-sm-6">#}
+{#                            <label for="deptwo48" class="form-label">Employee UnderWork</label>#}
+{#                            <input type="text" class="form-control" id="deptwo48" value="40">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="modal-footer">#}
+{#            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>#}
+{#            <button type="submit" class="btn btn-primary">Save</button>#}
+{#        </div>#}
+{#    </div>#}
+{#    </div>#}
+{#</form>#}
 
-<!-- Edit Department-->
+
+
+
 <form method="post">
-    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title  fw-bold" id="depeditLabel">添加题目</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            {{ form.csrf_token }}
-            <div class="mb-2">
-                {{ form.type.label(class="form-label") }}
-                {{ form.type(class="form-control") }}
-                {% for message in form.type.errors %}
-                    <div class="small text-primary">{{ message }}</div>
-                {% endfor %}
-            </div>
-            <div class="mb-2">
-                {{ form.text.label(class="form-label") }}
-                {{ form.text(class="form-control") }}
-                {% for message in form.text.errors %}
-                    <div class="small text-primary">{{ message }}</div>
-                {% endfor %}
-            </div>
-            <div class="deadline-form">
-                <form>
-                    <div class="row g-3 mb-3">
-                        <div class="col-sm-6">
-                            <label class="form-label">Department Head</label>
-                            <select class="form-select">
-                                <option selected>Joan Dyer</option>
-                                <option value="1">Ryan Randall</option>
-                                <option value="2">Phil Glover</option>
-                                <option value="3">Victor Rampling</option>
-                                <option value="4">Sally Graham</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="deptwo48" class="form-label">Employee UnderWork</label>
-                            <input type="text" class="form-control" id="deptwo48" value="40">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </div>
-    </div>
-</form>
 
-
-
-
-<form method="post">
-
-
+    {{ form.csrf_token }}
     {{ form.type.label }}
-    {% for subfield in form.type %}
-        <tr>
-            <td>{{ subfield }}</td>
-            <td>{{ subfield.label }}</td>
-        </tr>
-    {% endfor %}<br />
+    {{ form.type }}<br />
     {% for message in form.type.errors %}
         <small class="error">{{ message }}</small><br />
     {% endfor %}

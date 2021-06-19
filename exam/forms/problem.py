@@ -1,18 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, HiddenField, SelectField, SubmitField
+from wtforms import StringField, TextAreaField, HiddenField, SelectField, SubmitField, IntegerField
 from wtforms.validators import ValidationError
-
-
-def problem_type_not_empty(message=None):
-    """验证器：题目类型为 '0' '1' '2'"""
-    if message is None:
-        message = '请选择题目类型。'
-
-    def _problem_type_not_empty(form, field):
-        if field.data not in ['0', '1', '2']:
-            return ValidationError(message)
-
-    return _problem_type_not_empty
 
 
 def text_not_empty(message=None):
@@ -55,8 +43,8 @@ def check_solution(message=None):
 
 
 class ProblemForm(FlaskForm):
-    type = SelectField('题目类型', choices=[('0', '判断'), ('1', '单选'), ('2', '多选')],
-                       validators=[problem_type_not_empty()])
+    problem_id = IntegerField('编号', render_kw={'hidden': ''})
+    type = SelectField('题目类型', choices=[('0', '判断'), ('1', '单选'), ('2', '多选')])
     text = TextAreaField('题干', validators=[text_not_empty()])
     choice_A = StringField('选项 A', validators=[check_has_choice()])
     choice_B = StringField('选项 B', validators=[check_has_choice()])
