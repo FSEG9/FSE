@@ -2,7 +2,7 @@
  * Bootstrap v5.0.0-beta3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
- * 更多精品模板：http://www.bootstrapmb.com
+ * 锟斤拷锟洁精品模锟藉：http://www.bootstrapmb.com
  */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
 
@@ -269,6 +269,14 @@ table {
 	border-collapse: collapse
 }
 
+.breadcrumb i,
+.breadcrumb [class^="mdi-"], .breadcrumb [class*="mdi-"],
+.breadcrumb i.material-icons {
+  display: inline-block;
+  float: left;
+  font-size: 24px;
+}
+
 caption {
 	padding-top: .5rem;
 	padding-bottom: .5rem;
@@ -311,6 +319,7 @@ button,select {
 }[role="button"] {
 	cursor: pointer
 }
+
 
 select {
 	word-wrap: normal

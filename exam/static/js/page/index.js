@@ -97,7 +97,6 @@ $(function() {
             }],
             yaxis: {
                 min: new Date('2020-03-01').getTime(),
-                max: new Date('2020-03-14').getTime(),
                 max: new Date('2020-03-18').getTime(),
             },
             xaxis: {

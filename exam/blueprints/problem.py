@@ -49,6 +49,7 @@ def add_problem():
                           choice_C=form.choice_C.data,
                           choice_D=form.choice_D.data,
                           solution=form.solution.data,
+                          chosen=0,
                           adder=form.adder.data)
         db.session.add(problem)
         for tag_name in set(form.tags.data.split()):

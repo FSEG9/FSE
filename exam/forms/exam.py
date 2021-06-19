@@ -4,11 +4,15 @@ from wtforms.validators import DataRequired, Length
 
 
 class generate_exam(FlaskForm):
+    name = StringField("试卷名称")
+    subject = StringField("试卷学科")
     strt_time = StringField("起始时间")
     end_time = StringField("结束时间")
-    submit = SubmitField("添加学生")
-    submit = SubmitField("+")
-    submit = SubmitField("自动生成试卷")
-    submit = SubmitField("保存测试")
+    add_stu = SubmitField("添加学生")
+    add_prob = SubmitField("+")
+    auto_gen = SubmitField("自动生成试卷")
+    submit = SubmitField("提交测试")
 
 
+class search_add(FlaskForm):
+    submit = SubmitField("保存")

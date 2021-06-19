@@ -11,13 +11,12 @@ exam_has_problem = db.Table(
 
 
 class Paper(db.Model):
+    name = db.Column(db.String(50), nullable=False)
     paper_id = db.Column(db.Integer, primary_key=True, nullable=False)
     subject = db.Column(db.String(40), nullable=False)
     strt_t = db.Column(db.DateTime, default=datetime.now, nullable=False)
     end_t = db.Column(db.DateTime, nullable=False)
-    duration = db.Column(db.DateTime, nullable=False)
-    published = db.Column(db.Boolean, nullable=False)
-    end = db.Column(db.Boolean, nullable=False)
+    end = db.Column(db.Boolean, nullable=False, default=False)
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
