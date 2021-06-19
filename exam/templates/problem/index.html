@@ -2,6 +2,11 @@
 
 {% block title %}教师题库管理{% endblock %}
 
+{% block plugin_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugin/datatables/responsive.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugin/datatables/dataTables.bootstrap5.min.css') }}">
+{% endblock %}
+
 {% block content %}
 
     <div class="body d-flex py-lg-3 py-md-2">
@@ -11,7 +16,9 @@
                     <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0">我管理的试题</h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <a href="{{ url_for('problem.add_problem') }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-plus-circle me-2 fs-6"></i>新建试题</a>
+                            <button type="button" class="btn btn-dark btn-set-task w-sm-100 problem-edit" problem-id="0" >
+                                <i class="icofont-plus-circle me-2 fs-6"></i>新建试题
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -20,6 +27,7 @@
                 <div class="col-sm-12">
                     <div class="card mb-3">
                         <div class="card-body">
+
                             <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
                                 <thead>
                                     <tr>
@@ -33,11 +41,6 @@
                                 </thead>
                                 <tbody>
 
-                                {% if not problems %}
-                                    <tr>
-                                        <td colspan="6">无题目</td>
-                                    </tr>
-                                {% else %}
                                     {% for problem in problems %}
                                         <tr>
                                             <td><span class="fw-bold">{{ problem.problem_id }}</span></td>
@@ -55,13 +58,12 @@
                                             <td>0</td> {# TODO: 添加引用次数 #}
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <a href="{{ url_for('problem.edit_problem', problem_id=problem.problem_id) }}" class="btn btn-outline-secondary"><i class="icofont-edit text-success"></i></a>
+                                                    <button problem-id="{{ problem.problem_id }}" class="btn btn-outline-secondary problem-edit"><i class="icofont-edit text-success"></i></button>
                                                     <a href="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}" class="btn btn-outline-secondary"><i class="icofont-ui-delete text-danger"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
                                     {% endfor %}
-                                {% endif %}
 
                                 </tbody>
                             </table>
@@ -70,7 +72,56 @@
                 </div>
             </div><!-- Row End -->
         </div>
+
+
+
+    <div class="modal fade" id="problem-edit-pane" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+
     </div>
 
+    </div>
 
+{% endblock %}
+
+{% block plugin_js %}
+<script src="{{ url_for('static', filename='bundles/dataTables.bundle.js') }}"></script>
+{% endblock %}
+
+{% block custom_js %}
+<script>
+
+    $(document).ready(function() {
+        $('#myProjectTable')
+        .addClass( 'nowrap' )
+        .dataTable( {
+            responsive: true,
+            columnDefs: [
+                { targets: [-1, -3], className: 'dt-body-right' }
+            ]
+        });
+
+        $('.deleterow').on('click',function(){
+        var tablename = $(this).closest('table').DataTable();
+        tablename
+                .row( $(this)
+                .parents('tr') )
+                .remove()
+                .draw();
+
+        } );
+
+        $('.problem-edit').on('click',function(event){
+            let id = $(this).attr('problem-id');
+            $.ajax({
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                url: '{{ url_for('problem.render_problem_edit') }}'
+            }).done(function(data) {
+                $('#problem-edit-pane').html(data).modal('show');
+            })
+        });
+    });
+</script>
 {% endblock %}
