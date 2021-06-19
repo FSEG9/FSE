@@ -1,0 +1,22 @@
+<tr>
+    <td><span class="fw-bold">{{ problem.problem_id }}</span></td>
+    <td>
+        {% if problem.type == 0 %}判断{% endif %}
+        {% if problem.type == 1 %}单选{% endif %}
+        {% if problem.type == 2 %}多选{% endif %}
+    </td>
+    <td>{{ problem.text | truncate(25) }}</td>
+    <td>
+        {% for tag in problem.tags %}
+            <span class="badge bg-success">{{ tag.tag_name }}</span>
+        {% endfor %}
+    </td>
+    <td>0</td> {# TODO: 添加引用次数 #}
+    <td>
+        <span class="item-body">
+            <a class="btn btn-dark btn-sm mt-1" data-href="{{ url_for('.choose_prob', problem_id=problem.problem_id) }}">
+                <i class="icofont-invisible me-2 fs-6"></i>选择(要改)</a>
+            </a>
+        </span>
+    </td>
+</tr>
