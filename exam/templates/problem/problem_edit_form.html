@@ -2,34 +2,31 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title  fw-bold" id="addUserLabel">
-                {% if edit %}修改试题{% else %}新建试题{% endif %}
+                编辑试题
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{{ url_for('problem.edit_problem') }}" method="post">
+            <form action="{{ url_for('problem.edit_problem') }}" method="post" id="edit-form">
                 {{ form.csrf_token }}{{ form.adder }}{{ form.problem_id }}
                 <div class="row mb-2">
                     <div class="col-4">
-                        {{ form.type.label(class="form-label") }}{{ form.type(class="form-control") }}
+                        {{ form.type.label(class="form-label") }}{{ form.type(class="form-control form-select", id="problem-type") }}
                         {% for message in form.type.errors %}
-                            <div class="invalid-feedback">{{ message }}</div>
+                            <div class="form-text text-danger">{{ message }}</div>
                         {% endfor %}
                     </div>
                     <div class="col-8">
                         {{ form.tags.label(class="form-label") }}{{ form.tags(class="form-control") }}
-                        {% for message in form.tags.errors %}
-                            <div class="invalid-feedback">{{ message }}</div>
-                        {% endfor %}
                     </div>
                 </div>
                 <div class="mb-2">
                     {{ form.text.label(class="form-label") }}{{ form.text(class="form-control", rows="3") }}
                     {% for message in form.text.errors %}
-                        <div class="invalid-feedback">{{ message }}</div>
+                        <div class="form-text text-danger">{{ message }}</div>
                     {% endfor %}
                 </div>
-                <div class="problem-choices">
+                <div id="choice-fields" class="">
                     <div class="mb-2">
                         <div class="row">
                             <div class="col-auto">
@@ -37,10 +34,10 @@
                             </div>
                             <div class="col">
                                 {{ form.choice_A(class="form-control") }}
+                                {% for message in form.choice_A.errors %}
+                                    <div class="form-text text-danger">{{ message }}</div>
+                                {% endfor %}
                             </div>
-                            {% for message in form.choice_A.errors %}
-                                <div class="invalid-feedback">{{ message }}</div>
-                            {% endfor %}
                         </div>
                     </div>
                     <div class="mb-2">
@@ -50,10 +47,10 @@
                             </div>
                             <div class="col">
                                 {{ form.choice_B(class="form-control") }}
+                                {% for message in form.choice_B.errors %}
+                                    <div class="form-text text-danger">{{ message }}</div>
+                                {% endfor %}
                             </div>
-                            {% for message in form.choice_B.errors %}
-                                <div class="invalid-feedback">{{ message }}</div>
-                            {% endfor %}
                         </div>
                     </div>
                     <div class="mb-2">
@@ -63,10 +60,10 @@
                             </div>
                             <div class="col">
                                 {{ form.choice_C(class="form-control") }}
+                                {% for message in form.choice_C.errors %}
+                                    <div class="form-text text-danger">{{ message }}</div>
+                                {% endfor %}
                             </div>
-                            {% for message in form.choice_C.errors %}
-                                <div class="invalid-feedback">{{ message }}</div>
-                            {% endfor %}
                         </div>
                     </div>
                     <div class="mb-2">
@@ -76,10 +73,10 @@
                             </div>
                             <div class="col">
                                 {{ form.choice_D(class="form-control") }}
+                                {% for message in form.choice_D.errors %}
+                                    <div class="form-text text-danger">{{ message }}</div>
+                                {% endfor %}
                             </div>
-                            {% for message in form.choice_D.errors %}
-                                <div class="invalid-feedback">{{ message }}</div>
-                            {% endfor %}
                         </div>
                     </div>
 
@@ -91,14 +88,16 @@
                         </div>
                         <div class="col">
                             {{ form.solution(class="form-control") }}
+                            {% for message in form.solution.errors %}
+                                <div class="form-text text-danger">{{ message }}</div>
+                            {% endfor %}
                         </div>
-                        {% for message in form.solution.errors %}
-                            <div class="invalid-feedback">{{ message }}</div>
-                        {% endfor %}
                     </div>
 
                 </div>
-                {{ form.submit(class="btn btn-primary") }}
+
+                <span class="btn btn-primary" id="problem-edit-submit">保存</span>
+
 
             </form>
         </div>

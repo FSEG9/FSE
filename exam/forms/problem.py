@@ -54,4 +54,3 @@ class ProblemForm(FlaskForm):
     adder = HiddenField('添加人', default='Default User')  # TODO: 添加登录验证
     tags = StringField('标签（多个标签用空格分隔）')
     submit = SubmitField('添加试题')
-    submit_cancel = SubmitField('取消')
