@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}显示考试{% endblock %}
+
+{% block content %}
+
+    <div class="body d-flex py-lg-3 py-md-2">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="border-0 mb-4">
+                    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                        <h3 class="fw-bold mb-0">我的考试</h3>
+                    </div>
+                </div>
+            </div> <!-- Row end  -->
+            <div class="row clearfix g-3">
+                <div class="col-sm-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
+                                <tbody>
+                                {% if not exams %}
+                                    <tr>
+                                        <td colspan="6">无考试</td>
+                                    </tr>
+                                {% else %}
+                                    {% for exam in exams %}
+                                        <tr>
+                                            <td>
+                                                <a href="/take_exam.html" class="name_QIjv7">{{ exam.name }}</a>
+                                            </td>
+                                            <td>结束时间:{{ exam.end_t }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Row End -->
+        </div>
+    </div>
+
+
+{% endblock %}
