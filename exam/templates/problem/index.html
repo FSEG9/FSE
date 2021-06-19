@@ -11,14 +11,20 @@
 
     <div class="body d-flex py-lg-3 py-md-2">
         <div class="container-xxl">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div class="row align-items-center">
                 <div class="border-0 mb-4">
                     <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0">我管理的试题</h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <button type="button" class="btn btn-dark btn-set-task w-sm-100 problem-edit" problem-id="0" >
+                            <span type="button" class="btn btn-dark btn-set-task w-sm-100 problem-edit" problem-id="0" >
                                 <i class="icofont-plus-circle me-2 fs-6"></i>新建试题
-                            </button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -75,11 +81,45 @@
 
 
 
-    <div class="modal fade" id="problem-edit-pane" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal fade" id="problem-edit-pane" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+
+
+
+
+
+
+
+
+
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title  fw-bold" id="addUserLabel">
+                编辑试题
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
 
     </div>
 
-    </div>
 
 {% endblock %}
 
@@ -89,6 +129,7 @@
 
 {% block custom_js %}
 <script>
+
 
     $(document).ready(function() {
         $('#myProjectTable')
@@ -110,18 +151,33 @@
 
         } );
 
-        $('.problem-edit').on('click',function(event){
-            let id = $(this).attr('problem-id');
-            $.ajax({
-                data: {
-                    id: id
-                },
-                type: 'POST',
-                url: '{{ url_for('problem.render_problem_edit') }}'
-            }).done(function(data) {
-                $('#problem-edit-pane').html(data).modal('show');
+        $('.problem-edit').on('click', function(){
+            let id = $(this).attr("problem-id");
+            $.post("{{ url_for('problem.render_edit_form') }}", {
+                id: id
+            }, function(data, status) {
+                $('#problem-edit-pane').html(data).modal("show");
+                if ($('#problem-type').val() === '0') $('#choice-fields').hide();
             })
         });
+
+        $(document).on('click', '#problem-edit-submit', function() {  // 在 Modal 中必须这么写，不知道为什么……
+           $.post("{{ url_for('problem.edit_problem') }}", $('#edit-form').serialize(), function(data, status) {
+               $('#problem-edit-pane').html(data);
+               if ($('#problem-type').val() === '0') $('#choice-fields').hide();
+           })
+        });
+
+        $(document).on('change', '#problem-type', function() {
+            let x = $(this).val();
+            if (x == '0') {
+                $('#choice-fields').hide();
+            }
+            else {
+                $('#choice-fields').show();
+            }
+        })
+
     });
 </script>
 {% endblock %}
