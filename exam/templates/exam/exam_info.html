@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}考试信息{% endblock %}
+
+{% block content %}
+
+    <div class="body d-flex py-lg-3 py-md-2">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="border-0 mb-4">
+                    <a class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                        <h3 class="fw-bold mb-0">{{ exam.name }}</h3>
+                        <h3 class="fw-bold mb-0">考试科目：{{ exam.subject }}</h3>
+                        <h3 class="fw-bold mb-0">开始时间：{{ exam.strt_t }}</h3>
+                        <h3 class="fw-bold mb-0">结束时间：{{ exam.end_t }}</h3>
+                        {% if label == False %}
+                            <button class="pc-button pc-color-pta cur-p" tabindex="0" type="button">
+                                <div class="pc-text pc-color-white whs-nw shrink no-grow">
+                                    <div class="pc-text-raw ellipsis" style="text-align: center;">开始答题</div>
+                                </div>
+                            </button>
+                        {% else %}
+                            <a href="{{ url_for('take_exam.take_exam', exam_id=exam.exam_id) }}">开始答题</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> <!-- Row end  -->
+        </div>
+    </div>
+
+
+{% endblock %}

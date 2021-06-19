@@ -27,7 +27,7 @@
                                     {% for exam in exams %}
                                         <tr>
                                             <td>
-                                                <a href="/take_exam.html" class="name_QIjv7">{{ exam.name }}</a>
+                                                <a href="{{ url_for('view_exam.show_information', paper_id = exam.paper_id) }}" class="name_QIjv7">{{ exam.name }}</a>
                                             </td>
                                             <td>结束时间:{{ exam.end_t }}</td>
                                         </tr>
