@@ -12,9 +12,9 @@
     <div class="body d-flex py-lg-3 py-md-2">
         <div class="container-xxl">
             {% for message in get_flashed_messages() %}
-                <div class="alert alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <div class="alert alert-info alert-dismissible fade show">
                     {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}
             <div class="row align-items-center">
@@ -65,7 +65,10 @@
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button problem-id="{{ problem.problem_id }}" class="btn btn-outline-secondary problem-edit"><i class="icofont-edit text-success"></i></button>
-                                                    <a href="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}" class="btn btn-outline-secondary"><i class="icofont-ui-delete text-danger"></i></a>
+                                                    <form class="inline-form" method="post" action="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}">
+                                                        <button class="btn btn-outline-secondary" onclick="return confirm('确定删除？')"><i class="icofont-ui-delete text-danger"></i></button>
+                                                    </form>
+                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -163,8 +166,13 @@
 
         $(document).on('click', '#problem-edit-submit', function() {  // 在 Modal 中必须这么写，不知道为什么……
            $.post("{{ url_for('problem.edit_problem') }}", $('#edit-form').serialize(), function(data, status) {
-               $('#problem-edit-pane').html(data);
-               if ($('#problem-type').val() === '0') $('#choice-fields').hide();
+               if (data === 'OK') {
+                   window.location.reload();
+               }
+               else {
+                   $('#problem-edit-pane').html(data);
+                   if ($('#problem-type').val() === '0') $('#choice-fields').hide();
+               }
            })
         });
 

@@ -23,7 +23,7 @@ def render_edit_form():
     if problem_id != 0:
         problem = Problem.query.filter_by(problem_id=str(problem_id)).first()
 
-        form.type.data = problem.type
+        form.type.data = str(problem.type)
         form.text.data = problem.text
         form.choice_A.data = problem.choice_A
         form.choice_B.data = problem.choice_B
@@ -36,36 +36,7 @@ def render_edit_form():
     return render_template('problem/problem_edit_form.html', form=form)
 
 
-@problem_bp.route('/add-problem', methods=['GET', 'POST'])
-def add_problem():
-    form = ProblemForm()
-
-    if form.validate_on_submit():
-        problem = Problem(type=int(form.type.data),
-                          text=form.text.data,
-                          choice_A=form.choice_A.data,
-                          choice_B=form.choice_B.data,
-                          choice_C=form.choice_C.data,
-                          choice_D=form.choice_D.data,
-                          solution=form.solution.data,
-                          chosen=0,
-                          adder=form.adder.data)
-        db.session.add(problem)
-        for tag_name in set(form.tags.data.split()):
-            tag = Tag.query.filter_by(tag_name=tag_name).first()
-            if tag is None:
-                tag = Tag(tag_name=tag_name)
-            if tag not in problem.tags:
-                problem.tags.append(tag)
-
-        db.session.commit()
-        flash('题目添加成功。')
-        return redirect(url_for('.home'))
-
-    return render_template('problem/add_problem.html', form=form)
-
-
-@problem_bp.route('/delete-problem/<int:problem_id>')
+@problem_bp.route('/delete-problem/<int:problem_id>', methods=['POST'])
 def delete_problem(problem_id):
     problem = Problem.query.filter_by(problem_id=problem_id).first()
     if problem is not None:
@@ -115,6 +86,7 @@ def edit_problem():
                 problem.tags.append(tag)
 
         db.session.commit()
-        return render_template('problem/problem_edit_success.html')
+        flash('题目更新成功。')
+        return 'OK'
 
     return render_template('problem/problem_edit_form.html', form=form)
