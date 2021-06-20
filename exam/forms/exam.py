@@ -16,3 +16,4 @@ class generate_exam(FlaskForm):
 
 class search_add(FlaskForm):
     submit = SubmitField("保存")
+

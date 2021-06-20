@@ -12,7 +12,7 @@
                 <h5 class="mb-0 fw-bold ">测验名称</h5>
             </div>
             <div class="row" style="text-align: right">
-                <p>剩余时间：000:00</p>
+                <p>得分：0</p>
             </div>
         </div>
     </div>
@@ -20,6 +20,7 @@
 <form method="post">
     <br />
     {{ form.csrf_token }}
+    {#  for problem in problems #}
     {{ form.text.label}}<br/>
     {% for subfield in form.singlechoices%}
         <tr>
@@ -28,11 +29,10 @@
             <br />
         </tr>
     {% endfor %}
-    <br />
-
+    {#  if 正确 #}
+    <div style="background-color:#eee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答正确，得 2 分</p></div>
+    {#  else #}
+    <div class="text-light" style="background-color:#FA5F55;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答错误，得 0 分<br>　正确答案：D</p></div>
 </form>
 
-<div class="col-auto d-flex w-sm-100">
-    <a href="{{ url_for('.exam_answerlist') }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-upload-alt me-2 fs-6"></i>提交试卷</a>
-</div>
 {% endblock %}
