@@ -11,11 +11,6 @@
             <span class="badge bg-success">{{ tag.tag_name }}</span>
         {% endfor %}
     </td>
-    <td>0</td> {# TODO: 添加引用次数 #}
-    <td>
-        <span class="item-body">
-            <!--<a class="btn btn-dark btn-sm mt-1" data-href="{{ url_for('.choose_prob', problem_id=problem.problem_id) }}">选择(要改)</a>-->
-            <input class="done-btn" type="checkbox" data-href="{{ url_for('.choose_prob', problem_id=problem.problem_id) }}" id="checkbox01" /><label for="checkbox01"></label>
-        </span>
-    </td>
+
+
 </tr>

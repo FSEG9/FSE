@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from exam import db
+from exam.models.answer import exam_has_anspaper
 
 exam_has_problem = db.Table(
     'exam_has_problem',
@@ -19,3 +20,6 @@ class Paper(db.Model):
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
+    anspapers = db.relationship('Anspaper',
+                                secondary=exam_has_anspaper,
+                                back_populates='paper')
