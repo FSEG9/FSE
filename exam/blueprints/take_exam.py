@@ -1,33 +1,35 @@
 from flask import Blueprint
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template
+
+from exam.models.exam import exam_has_problem, Paper
 from exam.models.problem import Problem
 
 take_exam_bp = Blueprint('take_exam', __name__)
 
 
-@take_exam_bp.route('/')
-
+@take_exam_bp.route('/', methods=['GET', 'POST'])
 def home():
-#<<<<<<< HEAD
-    problems = Problem.query.filter_by().all() #fty：这里我不会选题目
-    return render_template('exam/take_exam.html',problems=problems)
-
-@take_exam_bp.route('/answerlist')
-
-def exam_answerlist():
-
-    return render_template('exam/answerlist.html')
-#=======
-    return '这是学生参加考试的主页面。'
+    return '没用的界面'
 
 
-@take_exam_bp.route('/take_exam')
-def take_exam():
-    return '这是开始考试的界面'
-
-
-@take_exam_bp.route('/show_exam')
-def show_exam():
-    problems = Problem.query.filter_by().all()  # fty：这里我不会选题目
+@take_exam_bp.route('/<int:exam_id>', methods=['GET', 'POST'])
+def take_exam(exam_id):
+    problems = Paper.query.filter_by(paper_id=exam_id).first().problems
     return render_template('exam/take_exam.html', problems=problems)
-#>>>>>>> 14f5db0cfb24df424ce7f252a0f0ef822ad0b127
+
+
+# @take_exam_bp.route('/gen_answer_paper', methods=['GET', 'POST'])
+# def gen_answer():
+
+
+
+@take_exam_bp.route('/show_exam/<int:exam_id>')
+def show_exam(exam_id):
+    problems = Paper.query.filter_by(paper_id=exam_id).first().problems
+    return render_template('exam/show_exam.html', problems=problems)
+
+
+# @take_exam_bp.route('/show_exa')
+# def exam_answers(exam_id):
+#     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
+#     return render_template('exam/show_exam.html', problems=problems)
