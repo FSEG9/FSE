@@ -21,6 +21,4 @@ class Paper(db.Model):
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
-    anspapers = db.relationship('Anspaper',
-                                secondary=exam_has_anspaper,
-                                back_populates='paper')
+    anspapers = db.relationship('Anspaper')
