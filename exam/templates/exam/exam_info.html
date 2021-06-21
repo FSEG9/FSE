@@ -13,11 +13,7 @@
                         <h3 class="fw-bold mb-0">开始时间：{{ exam.strt_t }}</h3>
                         <h3 class="fw-bold mb-0">结束时间：{{ exam.end_t }}</h3>
                         {% if label == 0 %}
-                            <button class="pc-button pc-color-pta cur-p" tabindex="0" type="button">
-                                <div class="pc-text pc-color-white whs-nw shrink no-grow">
-                                    <div class="pc-text-raw ellipsis" style="text-align: center;">开始答题</div>
-                                </div>
-                            </button>
+                            <div>考试尚未开始</div>
                         {% elif label == 1 %}
                             <a href="{{ url_for('take_exam.show_exam', exam_id=exam.exam_id) }}">查看试卷</a>
                         {% else %}
