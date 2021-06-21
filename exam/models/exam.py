@@ -20,3 +20,4 @@ class Paper(db.Model):
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
+

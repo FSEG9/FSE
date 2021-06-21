@@ -35,3 +35,4 @@ class Tag(db.Model):
     problems = db.relationship('Problem',
                                secondary=problem_has_tag,
                                back_populates='tags')
+
