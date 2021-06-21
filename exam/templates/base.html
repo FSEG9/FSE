@@ -14,12 +14,7 @@
 
 </head>
 <body>
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-{% endfor %}
+
 <div id="mytask-layout" class="theme-indigo">
 
     {% include '_sidebar.html' %}
@@ -28,6 +23,7 @@
     <div class="main px-lg-4 px-md-4">
 
         {% include '_header.html' %}
+
 
         {% block content %}{% endblock %}
 
@@ -41,6 +37,8 @@
 
 <!-- Jquery Page Js -->
 <script src="{{ url_for('static', filename='js/template.js') }}"></script>
+<script src="{{ url_for('static', filename='js/g_9.js') }}"></script>
+
 
 {% block custom_js %}{% endblock %}
 

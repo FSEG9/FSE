@@ -4,6 +4,7 @@ if (typeof jQuery === "undefined") {
 
 $(function() {
     "use strict";
+    
     //���ྫƷģ�壺http://www.bootstrapmb.com
     // main sidebar toggle js
     $('.menu-toggle').on('click', function () {
