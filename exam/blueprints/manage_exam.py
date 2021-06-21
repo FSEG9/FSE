@@ -15,13 +15,11 @@ def home():
     tags = Tag.query.all()
     form = generate_exam()
     fake = Faker()
-    print("bbbbba")
-    print(form.condition.data)
     if form.condition.data:
-        print(form.chosenTag.data)
-        print("1")
-        print(form.num_problem.data)
-        print("2")
+        # print(form.chosenTag.data)
+        # print("1")
+        # print(form.num_problem.data)
+        # print("2")
         chosen_tag = Tag.query.filter(Tag.tag_id == form.chosenTag.data).first()
         num = form.num_problem.data
         i=0
