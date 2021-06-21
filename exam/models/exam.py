@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from sqlalchemy import ForeignKey
 from exam import db
 from exam.models.answer import exam_has_anspaper
 
