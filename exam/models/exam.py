@@ -11,6 +11,7 @@ exam_has_problem = db.Table(
 )
 
 
+
 class Paper(db.Model):
     name = db.Column(db.String(50), nullable=False)
     paper_id = db.Column(db.Integer, primary_key=True, nullable=False)
