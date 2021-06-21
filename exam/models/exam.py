@@ -19,9 +19,9 @@ class Paper(db.Model):
     strt_t = db.Column(db.DateTime, default=datetime.now, nullable=False)
     end_t = db.Column(db.DateTime, nullable=False)
     end = db.Column(db.Boolean, nullable=False, default=False)
+    score = db.Column(db.Integer, default=-1)
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
-    anspapers = db.relationship('Anspaper',
-                                secondary=exam_has_anspaper,
-                                back_populates='paper')
+    anspapers = db.relationship('Anspaper')
+    

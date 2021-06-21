@@ -26,6 +26,6 @@ from exam.blueprints.view_exam import view_exam_bp
 from exam.blueprints.take_exam import take_exam_bp
 
 app.register_blueprint(problem_bp, url_prefix='/problem')
-app.register_blueprint(manage_exam_bp, url_prefix='/manage-exam')
-app.register_blueprint(view_exam_bp, url_prefix='/view-exam')
-app.register_blueprint(take_exam_bp, url_prefix='/take-exam')
+app.register_blueprint(manage_exam_bp, url_prefix='/manage_exam')
+app.register_blueprint(view_exam_bp, url_prefix='/view_exam')
+app.register_blueprint(take_exam_bp, url_prefix='/take_exam')

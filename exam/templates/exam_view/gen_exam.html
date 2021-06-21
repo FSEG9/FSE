@@ -18,8 +18,46 @@
 
         </div>
         <input type="submit" class="btn btn-dark btn-set-task w-sm-100" name="submit" value="生成试卷">
-        <input type="submit" class="btn btn-dark btn-set-task w-sm-100" name="auto_gen" value="自动选题">
+
+
+
+        <!-- Button trigger modal -->
+        <input type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="自动选题">
+
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">自动选题</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <select class="form-select" aria-label="Default select Project Category" name="chosenTag">
+                    {% for tag in tags %}
+                        <option value={{tag.tag_id}}>{{tag.tag_name}}</option>
+                    {% endfor %}}
+                </select>
+                  <br/>
+                  <label>
+                      <input type="text" class="form-control form-control-sm" name="num_problem" placeholder="题目数量" aria-controls="myProjectTable">
+                  </label>
+              </div>
+              <div class="modal-footer">
+                <input type="submit" class="btn btn-secondary" name="condition" value="提交">
+                <input type="submit" class="btn btn-primary" value="取消">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     </div>
+
+
 
         <tbody>
         <div class="card-body">
