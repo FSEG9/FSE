@@ -10,6 +10,7 @@ problem_bp = Blueprint('problem', __name__)
 
 @problem_bp.route('/')
 def home():
+    
     problems = Problem.query.all()
     return render_template('problem/index.html', problems=problems)
 

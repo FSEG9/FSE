@@ -3,22 +3,90 @@
 {% block title %}修改题目{% endblock %}
 
 {% block content %}
+    {% for message in get_flashed_messages() %}
+                <div class="alert alert-info alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+    <form method="post" action="{{ url_for('manage_exam.home') }}">
     <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
         <h3 class="fw-bold mb-0">生成测试</h3>
         <div class="col-auto d-flex w-sm-100">
             <a href="{{ url_for('.exam_search_add') }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-plus-circle me-2 fs-6"></i>添加题目</a>
+
+
+        </div>
+        <input type="submit" class="btn btn-dark btn-set-task w-sm-100" name="submit" value="生成试卷">
+        <input type="submit" class="btn btn-dark btn-set-task w-sm-100" name="auto_gen" value="自动选题">
+    </div>
+
+        <tbody>
+        <div class="card-body">
+            <div id="myProjectTable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="myProjectTable" class="table table-hover align-middle mb-0 nowrap dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="myProjectTable_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 175.2px;" aria-sort="ascending" aria-label="Project Name: activate to sort column descending">学科</th>
+                                    <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Thur: activate to sort column ascending">试卷名称</th>
+                                    <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Mon: activate to sort column ascending">开始时间</th><th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Tue: activate to sort column ascending"></th>
+                                    <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Wed: activate to sort column ascending">结束时间</th><th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Thur: activate to sort column ascending"></th>
+                            </thead>
+                        <tbody>
+                            <tr role="row" class="odd parent">
+                                <td tabindex="0" class="sorting_1" style="">
+                                    <select class="form-select" aria-label="Default select Project Category" name="subject">
+                                        <option selected="">数据结构</option>
+                                        <option value="1">数据库系统</option>
+                                        <option value="2">面向对象程序设计</option>
+                                        <option value="3">Java</option>
+                                        <option value="4">C++</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" name="name" placeholder="" aria-controls="myProjectTable">
+                                </td>
+
+                                <td>
+                                    <input type="date" class="form-control" id="timepickerded30" name="start_date">
+                                </td>
+                                <td>
+                                    <input type="time" class="form-control" id="timepickerded31" value="08:00:00" name="start_time">
+                                </td>
+                                <td>
+                                    <input type="date" class="form-control" id="timepickerded32" name="end_date">
+                                </td>
+                                <td>
+                                    <input type="time" class="form-control" id="timepickerded33" value="08:00:00" name="end_time">
+                                </td>
+
+
+                            </tr>
+
+                                {% if not chosen_pro %}
+                                    <tr>
+                                        <td colspan="6">无题目</td>
+                                    </tr>
+                                {% else %}
+                                    {% for problem in chosen_pro %}
+                                        {% include 'exam_view/_problem_display.html' %}
+                                    {% endfor %}
+                                {% endif %}
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
-    <form method="post">
-                            {{ form.name.label }}<br/>{{ form.name }}<br/>
-                            {{ form.subject.label }}<br/>{{ form.subject }}<br/>
-                            {{ form.strt_time.label }}<br/>{{ form.strt_time }}<br/>
-                            {{ form.end_time.label }}<br/>{{ form.end_time }}<br/>
-                            {{ form.add_stu.label }}<br/>{{ form.add_stu }}<br/>
-                            {{ form.add_prob.label }}<br/>{{ form.add_prob }}<br/>
-                            {{ form.auto_gen.label }}<br/>{{ form.auto_gen }}<br/>
-                            {{ form.submit.label }}<br/>{{ form.submit }}<br/>
 
-                        </form>
+
+        </tbody>
+
+    </form>
 {% endblock %}
