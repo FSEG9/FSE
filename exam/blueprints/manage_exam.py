@@ -63,7 +63,7 @@ def home():
 @manage_exam_bp.route('/problem/add', methods=['GET', 'POST'])
 def exam_search_add():
     form = search_add()
-    problems = Problem.query.filter(Problem.chosen == 1).all()
+    problems = Problem.query.filter(Problem.chosen == 0).all()
     if form.submit.data:
         return redirect(url_for('.home'))
     return render_template('exam_view/exam_search_add.html', form=form, problems=problems)
