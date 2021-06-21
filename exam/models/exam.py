@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from sqlalchemy import ForeignKey
 from exam import db
 
 exam_has_problem = db.Table(
