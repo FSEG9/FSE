@@ -17,7 +17,7 @@
                         {% elif label == 1 %}
                             <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}">查看试卷</a>
                         {% else %}
-                            <a href="{{ url_for('take_exam.home', exam_id=exam.paper_id) }}">开始答题</a>
+                            <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}">开始答题</a>
                         {% endif %}
                 </div>
             </div> <!-- Row end  -->
