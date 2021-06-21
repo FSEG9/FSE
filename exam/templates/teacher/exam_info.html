@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}考试信息{% endblock %}
+
+{% block content %}
+
+    <div class="body d-flex py-lg-3 py-md-2">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="border-0 mb-4">
+                        <h3 class="fw-bold mb-0">{{ exam.name }}</h3>
+                        <h3 class="fw-bold mb-0">考试科目：{{ exam.subject }}</h3>
+                        <h3 class="fw-bold mb-0">开始时间：{{ exam.strt_t }}</h3>
+                        <h3 class="fw-bold mb-0">结束时间：{{ exam.end_t }}</h3>
+                        {% if label == 0 %}
+                            <div>考试尚未开始</div>
+                        {% elif label == 1 %}
+                            <div>考试正在进行，请耐心等候</div>
+                        {% elif label == 2 %}
+                            <a href="{{ url_for('teacher.show_exam', exam_id=exam.paper_id) }}">查看考试结果</a>
+                        {% endif %}
+                </div>
+            </div> <!-- Row end  -->
+        </div>
+    </div>
+
+
+{% endblock %}
