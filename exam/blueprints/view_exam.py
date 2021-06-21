@@ -9,7 +9,7 @@ view_exam_bp = Blueprint('view_exam', __name__)
 
 
 @view_exam_bp.route('/')
-def home():
+def home(exam_id):
     exams = Paper.query.all()
     return render_template('exam/view_exam.html', exams=exams)
 
