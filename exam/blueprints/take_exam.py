@@ -28,6 +28,6 @@ def take_exam():
 
 @take_exam_bp.route('/show_exam')
 def show_exam():
-
-    return '这是显示答卷的界面'
+    problems = Problem.query.filter_by().all()  # fty：这里我不会选题目
+    return render_template('exam/take_exam.html', problems=problems)
 #>>>>>>> 14f5db0cfb24df424ce7f252a0f0ef822ad0b127
