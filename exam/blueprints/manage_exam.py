@@ -3,7 +3,7 @@ from faker import Faker
 from exam import db
 from exam.forms.exam import generate_exam, search_add
 from exam.models.exam import Paper
-from exam.models.problem import Problem
+from exam.models.problem import Problem, Tag
 
 manage_exam_bp = Blueprint('manage_exam', __name__)
 
@@ -12,13 +12,27 @@ manage_exam_bp = Blueprint('manage_exam', __name__)
 def home():
     chosen_pro = Problem.query.filter(Problem.chosen == 1).all()
     # print(chosen_pro)
-
+    tags = Tag.query.all()
     form = generate_exam()
     fake = Faker()
-    if form.auto_gen.data:
-        return redirect(url_for('manage_exam.select_condition'))
+    print("bbbbba")
+    print(form.condition.data)
+    if form.condition.data:
+        print(form.chosenTag.data)
+        print("1")
+        print(form.num_problem.data)
+        print("2")
+        chosen_tag = Tag.query.filter(Tag.tag_id == form.chosenTag.data).first()
+        num = form.num_problem.data
+        i=0
+        for problem in chosen_tag.problems:
+            if i == num:
+                break
+            i = i + 1
+            problem.chosen = 1
+        db.session.commit()
     if form.submit.data:
-        try:
+        # try:
             start_time = form.start_date.data + "-" + form.start_time.data
             end_time = form.end_date.data + "-" + form.end_time.data
 
@@ -36,9 +50,9 @@ def home():
                 problem.chosen = False
             db.session.commit()
             flash('生成成功')
-        except Exception as e:
-            flash('错误操作')  # to be continued: error page...
-    return render_template('exam_view/gen_exam.html', form=form, chosen_pro=chosen_pro)
+        # except Exception as e:
+        #     flash('错误操作')  # to be continued: error page...
+    return render_template('exam_view/gen_exam.html', form=form, tags=tags, chosen_pro=chosen_pro)
 
 
 @manage_exam_bp.route('/problem/add', methods=['GET', 'POST'])
