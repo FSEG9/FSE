@@ -18,8 +18,8 @@ def take_exam(exam_id):
     return render_template('exam/take_exam.html', problems=problems)
 
 
-@take_exam_bp.route('/gen_answer_paper', methods=['GET', 'POST'])
-def gen_answer():
+# @take_exam_bp.route('/gen_answer_paper', methods=['GET', 'POST'])
+# def gen_answer():
 
 
 
