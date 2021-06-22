@@ -36,8 +36,11 @@ def take_exam(exam_id):
             answerpaper.Answers.append(a)
         db.session.add(answerpaper)
         db.session.commit()
-        # flash('提交成功.')
-        return redirect(url_for('view_exam.finish_exam', paper_id=exam_id))
+        paper = Paper.query.filter_by(paper_id=exam_id).first()
+        paper.end = True
+        db.session.commit()
+        flash('提交成功.')
+        return redirect(url_for('view_exam.home'))
     return render_template('exam/take_exam.html', problems=problems, exam_id=exam_id)
 
 
