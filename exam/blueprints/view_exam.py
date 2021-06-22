@@ -19,10 +19,8 @@ def home():
 def show_information(paper_id):
     exam = Paper.query.filter_by(paper_id=paper_id).first()
     dt1 = time.time()
-    n_time = datetime.strftime(exam.strt_t, "%Y-%m-%d")
-    dt2 = time.mktime(time.strptime(n_time, "%Y-%m-%d"))  # 开始时间
-    n_time = datetime.strftime(exam.end_t, "%Y-%m-%d")
-    dt3 = time.mktime(time.strptime(n_time, "%Y-%m-%d"))  # 结束时间
+    dt2 = time.mktime(exam.strt_t.timetuple())  # 开始时间
+    dt3 = time.mktime(exam.end_t.timetuple())  # 结束时间
     if dt1>dt3:
         label = 1
     elif dt1<dt2:

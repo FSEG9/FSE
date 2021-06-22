@@ -22,18 +22,27 @@ def take_exam(exam_id):
         answerpaper = Anspaper(paper_id=exam_id)
         db.session.add(answerpaper)
         db.session.commit()
+        fullscore = 0
         for problem in problems:
             answer = ""
+            score = 0
             if problem.type != 2:
                 answer = request.form.get(str(problem.problem_id))
+                if answer == problem.solution:
+                    score = 1
+                    fullscore += 1
                 # print(answer)
             else:
                 answers = request.form.getlist(str(problem.problem_id))
                 for ans in answers:
                     answer += ans
-            a = Anspa_prob_answer(problem_id=problem.problem_id, answer=answer, anspaper_id=answerpaper.anspaper_id)
+                if answer == problem.solution:
+                    score = 1
+                    fullscore += 1
+            a = Anspa_prob_answer(problem_id=problem.problem_id, answer=answer, anspaper_id=answerpaper.anspaper_id, score=score)
             db.session.add(a)
             answerpaper.Answers.append(a)
+            answerpaper.score_all = fullscore
         db.session.add(answerpaper)
         db.session.commit()
         paper = Paper.query.filter_by(paper_id=exam_id).first()

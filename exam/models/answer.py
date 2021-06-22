@@ -13,7 +13,7 @@ class Anspaper(db.Model):
     paper_id = db.Column(db.Integer, db.ForeignKey('paper.paper_id'))
     student_id = db.Column(db.Integer, nullable=False)
     score_all = db.Column(db.Integer)
-    Answers = db.relationship("Anspa_prob_answer")
+    Answers = db.relationship("Anspa_prob_answer", lazy='dynamic')
 
 
 class Anspa_prob_answer(db.Model):
