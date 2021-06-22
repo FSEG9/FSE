@@ -23,14 +23,20 @@ def take_exam(exam_id):
         db.session.add(answerpaper)
         db.session.commit()
         for problem in problems:
-            answer = request.form.get(str(problem.problem_id))
-            # print(answer)
+            answer = ""
+            if problem.type != 2:
+                answer = request.form.get(str(problem.problem_id))
+                # print(answer)
+            else:
+                answers = request.form.getlist(str(problem.problem_id))
+                for ans in answers:
+                    answer += ans
             a = Anspa_prob_answer(problem_id=problem.problem_id, answer=answer, anspaper_id=answerpaper.anspaper_id)
             db.session.add(a)
             answerpaper.Answers.append(a)
         db.session.add(answerpaper)
         db.session.commit()
-        flash('提交成功.')
+        # flash('提交成功.')
         return redirect(url_for('view_exam.finish_exam', paper_id=exam_id))
     return render_template('exam/take_exam.html', problems=problems, exam_id=exam_id)
 

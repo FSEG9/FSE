@@ -56,19 +56,19 @@
             <div class="card-body justify-content-between ">
                 <p>(题号)<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
                 <p>
-                    <input type="checkbox" id="q-1-1" name={{ problem.problem_id }} value="A">
+                    <input type="checkbox" id="q-1-1" name="{{ problem.problem_id }}" value="A">
                     <label for="q-1-1">A. {{ problem.choice_A}}</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="q-1-2" name={{ problem.problem_id }} value="B">
+                    <input type="checkbox" id="q-1-2" name="{{ problem.problem_id }}" value="B">
                     <label for="q-1-2">B. {{ problem.choice_B}}</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="q-1-3" name={{ problem.problem_id }} value="C">
+                    <input type="checkbox" id="q-1-3" name="{{ problem.problem_id }}" value="C">
                     <label for="q-1-3">C. {{ problem.choice_C}}</label>
                 </p>
                 <p style="margin-bottom: 0px">
-                    <input type="checkbox" id="q-1-4" name={{ problem.problem_id }} value="D">
+                    <input type="checkbox" id="q-1-4" name="{{ problem.problem_id }}" value="D">
                     <label for="q-1-4">D. {{ problem.choice_D}}</label>
                 </p>
             </div>
@@ -83,3 +83,5 @@
 </form>
 
 {% endblock %}
+
+
