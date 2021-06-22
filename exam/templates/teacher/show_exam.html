@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}题目列表{% endblock %}
+
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-info alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="card bg-primary text-light">
+        <div class="card-body row-cols-3 d-flex justify-content-between" style="padding-bottom: 0px;">
+            <div class="row" style="text-align: left;">
+                <a href="{{ url_for('.show_information', paper_id=exam.paper_id)}}"><i class="icofont-arrow-left"></i> 返回</a>
+            </div>
+            <div class="row" style="text-align: center;">
+                <h5 class="mb-0 fw-bold ">{{ exam.name }}</h5>
+            </div>
+            <div class="row" style="text-align: right">
+                <p>平均分：{{ exam.score }}</p>
+            </div>
+        </div>
+    </div>
+
+<div>
+    <br />
+    {% for probanls in exam.probanls %}
+        {% if probanls.problem.type == 0 %}
+            <div class="card-body justify-content-between ">
+                <p>{{ loop.index}}<span class="text-muted">[判断]</span>{{probanls.problem.text}}<span class="text-muted">(1分)</span></p>
+                <p>T     选择人数：{{ probanls.T_count }}</p>
+                <p>F     选择人数：{{ probanls.F_count}}</p>
+                <p>正确答案：{{ probanls.problem.solution }}</p>
+                <p>正确率：  {{ probanls.accuracy }}</p>
+            </div>
+        {% elif probanls.problem.type == 1 %}
+            <div class="card-body justify-content-between ">
+                <p>{{ loop.index}}<span class="text-muted">[单选]</span>{{probanls.problem.text}}<span class="text-muted">(1分)</span></p>
+                <p>
+                    A. {{probanls.problem.choice_A}}
+                    选择人数：{{ probanls.A_count }}
+                </p>
+                <p>
+                    B. {{probanls.problem.choice_B}}
+                    选择人数：{{ probanls.B_count }}
+                </p>
+                <p>
+                    C. {{probanls.problem.choice_C}}
+                    选择人数：{{ probanls.C_count }}
+                </p>
+                <p>
+                    D. {{probanls.problem.choice_D}}
+                    选择人数：{{ probanls.D_count }}
+                </p>
+                <p>正确答案：{{ probanls.problem.solution }}</p>
+                <p>正确率：  {{ probanls.accuracy }}</p>
+            </div>
+        {% else %}
+            <div class="card-body justify-content-between ">
+                <p>{{ loop.index}}<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
+                <p>
+                    A. {{probanls.problem.choice_A}}
+                    选择人数：{{ probanls.A_count }}
+                </p>
+                <p>
+                    B. {{probanls.problem.choice_B}}
+                    选择人数：{{ probanls.B_count }}
+                </p>
+                <p>
+                    C. {{probanls.problem.choice_C}}
+                    选择人数：{{ probanls.C_count }}
+                </p>
+                <p>
+                    D. {{probanls.problem.choice_D}}
+                    选择人数：{{ probanls.D_count }}
+                </p>
+                <p>正确答案：{{ probanls.problem.solution }}</p>
+                <p>正确率：  {{ probanls.accuracy }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <br />
+</div>
+{% endblock %}

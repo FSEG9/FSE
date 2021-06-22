@@ -17,7 +17,7 @@
                         {% elif label == 1 %}
                             <div>考试正在进行，请耐心等候</div>
                         {% elif label == 2 %}
-                            <a href="{{ url_for('teacher.show_exam', exam_id=exam.paper_id) }}">查看考试结果</a>
+                            <a href="{{ url_for('teacher.show_exam', paper_id=exam.paper_id) }}">查看考试结果</a>
                         {% endif %}
                 </div>
             </div> <!-- Row end  -->

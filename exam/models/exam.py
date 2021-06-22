@@ -18,8 +18,9 @@ class Paper(db.Model):
     end_t = db.Column(db.DateTime, nullable=True)
     end = db.Column(db.Boolean,  default=False)
     score = db.Column(db.Float, default=-1)
+    anlsflag = db.Column(db.Boolean, default=False)
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
     anspapers = db.relationship('Anspaper')
-    
+    probanls = db.relationship('ProbAnalysis')
