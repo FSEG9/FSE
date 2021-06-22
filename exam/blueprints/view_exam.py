@@ -32,4 +32,3 @@ def show_information(paper_id):
     else:
         label = 2
     return render_template('exam/exam_info.html', exam=exam, label=label)
-
