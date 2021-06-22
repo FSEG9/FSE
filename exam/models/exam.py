@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from sqlalchemy import ForeignKey
 from exam import db
 from exam.models.answer import exam_has_anspaper
 
@@ -12,13 +11,13 @@ exam_has_problem = db.Table(
 
 
 class Paper(db.Model):
-    name = db.Column(db.String(50), nullable=False)
-    paper_id = db.Column(db.Integer, primary_key=True, nullable=False)
-    subject = db.Column(db.String(40), nullable=False)
-    strt_t = db.Column(db.DateTime, default=datetime.now, nullable=False)
-    end_t = db.Column(db.DateTime, nullable=False)
-    end = db.Column(db.Boolean, nullable=False, default=False)
-    score = db.Column(db.Integer, default=-1)
+    name = db.Column(db.String(50), nullable=True)
+    paper_id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(40), nullable=True)
+    strt_t = db.Column(db.DateTime, default=datetime.now, nullable=True)
+    end_t = db.Column(db.DateTime, nullable=True)
+    end = db.Column(db.Boolean,  default=False)
+    score = db.Column(db.Float, default=-1)
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')

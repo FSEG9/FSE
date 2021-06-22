@@ -25,4 +25,18 @@ $(function() {
         }
     });
 
+    $(document).on('click', '.Mydelete', function () {
+        var $item = $(this).parent().parent().parent();
+        var $this = $(this);
+
+            $.ajax({
+                type: 'PATCH',
+                url: $this.data('href'),
+                success: function (data) {
+                    $item.data('chosen', false);
+                    M.toast({html: data.message});
+                }
+            })
+
+    });
 })
