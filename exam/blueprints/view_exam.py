@@ -14,23 +14,22 @@ def home():
     return render_template('exam/view_exam.html', exams=exams)
 
 
+# 0 表示考试未开始， 1 表示考试已结束， 2 表示考试可以开始， 3 表示考试已结束
 @view_exam_bp.route('/information/<int:paper_id>')
 def show_information(paper_id):
     exam = Paper.query.filter_by(paper_id=paper_id).first()
-    if exam.end:
+    dt1 = time.time()
+    n_time = datetime.strftime(exam.strt_t, "%Y-%m-%d")
+    dt2 = time.mktime(time.strptime(n_time, "%Y-%m-%d"))  # 开始时间
+    n_time = datetime.strftime(exam.end_t, "%Y-%m-%d")
+    dt3 = time.mktime(time.strptime(n_time, "%Y-%m-%d"))  # 结束时间
+    if dt1>dt3:
+        label = 1
+    elif dt1<dt2:
+        label = 0
+    elif exam.end:
         label = 3
     else:
-        dt1 = time.time()
-        n_time = datetime.strftime(exam.strt_t, "%Y-%m-%d")
-        dt2 = time.mktime(time.strptime(n_time, "%Y-%m-%d"))  # 开始时间
-        n_time = datetime.strftime(exam.end_t, "%Y-%m-%d")
-        dt3 = time.mktime(time.strptime(n_time, "%Y-%m-%d"))  # 结束时间
-
-        if dt1<dt2:
-            label = 0
-        elif dt1>dt3:
-            label = 1
-        else:
-            label = 2
+        label = 2
     return render_template('exam/exam_info.html', exam=exam, label=label)
 

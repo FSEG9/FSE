@@ -47,10 +47,5 @@ def take_exam(exam_id):
 @take_exam_bp.route('/show_exam/<int:exam_id>')
 def show_exam(exam_id):
     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
-    return render_template('exam/show_exam.html', problems=problems)
+    return render_template('exam/show_list.html', problems=problems)
 
-
-# @take_exam_bp.route('/show_exa')
-# def exam_answers(exam_id):
-#     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
-#     return render_template('exam/show_exam.html', problems=problems)
