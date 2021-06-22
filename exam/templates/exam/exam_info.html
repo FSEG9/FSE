@@ -16,8 +16,10 @@
                             <div>考试尚未开始</div>
                         {% elif label == 1 %}
                             <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}">查看试卷</a>
-                        {% else %}
+                        {% elif label == 2 %}
                             <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}">开始答题</a>
+                        {% elif label == 3 %}
+                            <div>考试已结束</div>
                         {% endif %}
                 </div>
             </div> <!-- Row end  -->

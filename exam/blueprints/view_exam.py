@@ -30,3 +30,10 @@ def show_information(paper_id):
     else:
         label = 2
     return render_template('exam/exam_info.html', exam=exam, label=label)
+
+
+@view_exam_bp.route('/finish/<int:paper_id>')
+def finish_exam(paper_id):
+    exam = Paper.query.filter_by(paper_id=paper_id).first()
+    label = 3
+    return render_template('exam/exam_info.html', exam=exam, label=label)

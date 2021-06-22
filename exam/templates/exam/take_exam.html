@@ -24,11 +24,11 @@
             <div class="card-body justify-content-between ">
                 <p>(题号)<span class="text-muted">[判断]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
                 <p>
-                    <input type="radio" id="q-1-1" name="q-1" value="q-1-1">
+                    <input type="radio" id="q-1-1" name={{ problem.problem_id }} value="T">
                     <label for="q-1-1">正确</label>
                 </p>
                 <p style="margin-bottom: 0px">
-                    <input type="radio" id="q-1-2" name="q-1" value="q-1-2">
+                    <input type="radio" id="q-1-2" name={{ problem.problem_id }} value="F">
                     <label for="q-1-2">错误</label>
                 </p>
             </div>
@@ -36,19 +36,19 @@
             <div class="card-body justify-content-between ">
                 <p>(题号)<span class="text-muted">[单选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
                 <p>
-                    <input type="radio" id="q-1-1" name="q-2" value="q-1-1">
+                    <input type="radio" id="q-1-1" name={{ problem.problem_id }} value="A">
                     <label for="q-1-1">A. {{problem.choice_A}}</label>
                 </p>
                 <p>
-                    <input type="radio" id="q-1-2" name="q-2" value="q-1-2">
+                    <input type="radio" id="q-1-2" name={{ problem.problem_id }} value="B">
                     <label for="q-1-2">B. {{problem.choice_B}}</label>
                 </p>
                 <p>
-                    <input type="radio" id="q-1-3" name="q-2" value="q-1-3">
+                    <input type="radio" id="q-1-3" name={{ problem.problem_id }} value="C">
                     <label for="q-1-3">C. {{problem.choice_C}}</label>
                 </p>
                 <p style="margin-bottom: 0px">
-                    <input type="radio" id="q-1-4" name="q-2" value="q-1-4">
+                    <input type="radio" id="q-1-4" name={{ problem.problem_id }} value="D">
                     <label for="q-1-4">D. {{problem.choice_D}}</label>
                 </p>
             </div>
@@ -56,19 +56,19 @@
             <div class="card-body justify-content-between ">
                 <p>(题号)<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
                 <p>
-                    <input type="checkbox" id="q-1-1" name="q-1" value="q-1-1">
+                    <input type="checkbox" id="q-1-1" name={{ problem.problem_id }} value="A">
                     <label for="q-1-1">A. {{ problem.choice_A}}</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="q-1-2" name="q-1" value="q-1-2">
+                    <input type="checkbox" id="q-1-2" name={{ problem.problem_id }} value="B">
                     <label for="q-1-2">B. {{ problem.choice_B}}</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="q-1-3" name="q-1" value="q-1-3">
+                    <input type="checkbox" id="q-1-3" name={{ problem.problem_id }} value="C">
                     <label for="q-1-3">C. {{ problem.choice_C}}</label>
                 </p>
                 <p style="margin-bottom: 0px">
-                    <input type="checkbox" id="q-1-4" name="q-1" value="q-1-4">
+                    <input type="checkbox" id="q-1-4" name={{ problem.problem_id }} value="D">
                     <label for="q-1-4">D. {{ problem.choice_D}}</label>
                 </p>
             </div>
@@ -77,9 +77,9 @@
 
     <br />
 
+    <div class="col-auto d-flex w-sm-100">
+    <input type="submit" value="提交试卷" class="btn btn-dark btn-set-task w-sm-100"></input>
+    </div>
 </form>
 
-<div class="col-auto d-flex w-sm-100">
-    <a href="{{ url_for('take_exam.exam_answers') }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-upload-alt me-2 fs-6"></i>提交试卷</a>
-</div>
 {% endblock %}

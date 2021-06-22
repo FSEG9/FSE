@@ -62,7 +62,6 @@ def exam_search_add():
     return render_template('exam_view/exam_search_add.html', form=form, problems=problems)
 
 
-# 选择题目加入试卷
 @manage_exam_bp.route('/problem/<int:problem_id>/choose', methods=['PATCH'])
 # @login_required
 def choose_prob(problem_id):

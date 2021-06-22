@@ -86,7 +86,7 @@ exam/
 		problem.py
 		manage_exam.py
 		view_exam.py
-		take_exam.py
+		answer.py
 	forms/             # 表单
 		__init__.py
 		problem.py
