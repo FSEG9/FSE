@@ -61,14 +61,19 @@
                                                     <span class="badge bg-success">{{ tag.tag_name }}</span>
                                                 {% endfor %}
                                             </td>
-                                            <td>0</td> {# TODO: 添加引用次数 #}
+                                            <td>
+                                                {{ problem.papers | length }}
+                                            </td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button problem-id="{{ problem.problem_id }}" class="btn btn-outline-secondary problem-edit"><i class="icofont-edit text-success"></i></button>
-                                                    <form class="inline-form" method="post" action="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}">
-                                                        <button class="btn btn-outline-secondary" onclick="return confirm('确定删除？')"><i class="icofont-ui-delete text-danger"></i></button>
-                                                    </form>
-                                                     </a>
+                                                    {% if problem.papers | length == 0 %}
+                                                        <form class="inline-form" method="post" action="{{ url_for('problem.delete_problem', problem_id=problem.problem_id) }}">
+                                                            <button type="submit" class="btn btn-outline-secondary" onclick="return confirm('确定删除？')"><i class="icofont-ui-delete text-danger"></i></button>
+                                                        </form>
+                                                    {% else %}
+                                                        <button class="btn btn-outline-secondary" onclick="return alert('该题已与试卷绑定，无法删除。')"><i class="icofont-ui-delete text-muted"></i></button>
+                                                    {% endif %}
                                                 </div>
                                             </td>
                                         </tr>
@@ -121,7 +126,7 @@
 
         } );
 
-        $('.problem-edit').on('click', function(){
+        $(document).on('click', '.problem-edit', function(){
             let id = $(this).attr("problem-id");
             $.post("{{ url_for('problem.render_edit_form') }}", {
                 id: id

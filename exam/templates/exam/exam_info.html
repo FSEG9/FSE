@@ -3,28 +3,40 @@
 {% block title %}考试信息{% endblock %}
 
 {% block content %}
-
-    <div class="body d-flex py-lg-3 py-md-2">
+    <div class="body d-flex py-3">
         <div class="container-xxl">
-            <div class="row align-items-center">
-                <div class="border-0 mb-4">
-                        <h3 class="fw-bold mb-0">{{ exam.name }}</h3>
-                        <h3 class="fw-bold mb-0">考试科目：{{ exam.subject }}</h3>
-                        <h3 class="fw-bold mb-0">开始时间：{{ exam.strt_t }}</h3>
-                        <h3 class="fw-bold mb-0">结束时间：{{ exam.end_t }}</h3>
-                        {% if label == 0 %}
-                            <div>考试尚未开始</div>
-                        {% elif label == 1 %}
-                            <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}">查看试卷</a>
-                        {% elif label == 2 %}
-                            <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}">开始答题</a>
-                        {% elif label == 3 %}
-                            <div>考试已结束</div>
-                        {% endif %}
+            <div class="row clearfix g-3">
+                <a href="{{ url_for('view_exam.home') }}" class="btn bg-light lift" style="width:60pt;"><i class="icofont-arrow-left"></i> 返回</a>
+                <div class="card color-bg-100">
+                    <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                        <h5 class="mb-0 fw-bold ">{{ exam.name }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3 row-cols-2 top-perfomer">
+                            <div class="col">
+                                <p><strong>考试科目</strong>　{{ exam.subject }}</p>
+                                <p><strong>开放时间</strong>　{{ exam.strt_t }}</p>
+                                <p><strong>总分　　</strong>　100 分</p>
+                            </div>
+                            <div class="col">
+                                <p><strong>考试时长</strong>　2 小时</p>
+                                <p><strong>结束时间</strong>　{{ exam.end_t }}</p>
+                                <p><strong>题目数　</strong>　3 题</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div> <!-- Row end  -->
+                {% if label == 0 %}
+                    <div>考试尚未开始</div>
+                {% elif label == 1 %}
+                    <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:100pt;" target="_blank" >查看试卷</a>
+                {% elif label == 2 %}
+                    <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:100pt;" target="_blank" >开始答题</a>
+                {% elif label == 3 %}
+                    <div>考试已结束</div>
+                {% endif %}
+            </div><!-- Row End -->
         </div>
     </div>
-
 
 {% endblock %}

@@ -15,7 +15,6 @@ def main():
 <a href="{{ url_for('problem.home') }}">教师题目管理</a><br />   
 <a href="{{ url_for('manage_exam.home') }}">教师考试管理</a><br />
 <a href="{{ url_for('view_exam.home') }}">学生考试查看</a><br />
-<a href="{{ url_for('take_exam.home') }}">学生参与考试</a><br /> 
 <a href="{{ url_for('teacher.home') }}">老师查看考试</a><br />
 ''')
 
