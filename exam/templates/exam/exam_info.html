@@ -5,6 +5,7 @@
 {% block content %}
     <div class="body d-flex py-3">
         <div class="container-xxl">
+<<<<<<< HEAD
             <div class="row clearfix g-3">
                 <a href="{{ url_for('view_exam.home') }}" class="btn bg-light lift" style="width:60pt;"><i class="icofont-arrow-left"></i> 返回</a>
                 <div class="card color-bg-100">
@@ -25,6 +26,23 @@
                             </div>
                         </div>
                     </div>
+=======
+            <div class="row align-items-center">
+                <div class="border-0 mb-4">
+                        <h3 class="fw-bold mb-0">{{ exam.name }}</h3>
+                        <h3 class="fw-bold mb-0">考试科目：{{ exam.subject }}</h3>
+                        <h3 class="fw-bold mb-0">开始时间：{{ exam.strt_t }}</h3>
+                        <h3 class="fw-bold mb-0">结束时间：{{ exam.end_t }}</h3>
+                        {% if label == 0 %}
+                            <div>考试尚未开始</div>
+                        {% elif label == 1 %}
+                            <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}">查看试卷</a>
+                        {% elif label == 2 %}
+                            <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}">开始答题</a>
+                        {% elif label == 3 %}
+                            <div>考试已结束</div>
+                        {% endif %}
+>>>>>>> ca45f348ecf11a56f1dc239e979807025fe37696
                 </div>
                 {% if label == 0 %}
                             <div>考试尚未开始</div>
