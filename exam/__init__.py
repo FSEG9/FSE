@@ -19,7 +19,7 @@ def main():
 ''')
 
 
-from exam.commands import initdb
+from exam.commands import initdb, forge_problems
 from exam.blueprints.problem import problem_bp
 from exam.blueprints.manage_exam import manage_exam_bp
 from exam.blueprints.view_exam import view_exam_bp
