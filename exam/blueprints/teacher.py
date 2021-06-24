@@ -20,6 +20,7 @@ def show_information(paper_id):
     dt1 = time.time()
     dt2 = time.mktime(exam.strt_t.timetuple())  # 开始时间
     dt3 = time.mktime(exam.end_t.timetuple())  # 结束时间
+    length = len(exam.problems)
 
     if dt1<dt2:
         label = 0
@@ -27,7 +28,8 @@ def show_information(paper_id):
         label = 2
     else:
         label = 1
-    return render_template('teacher/exam_info.html', exam=exam, label=label)
+    t = int(int(dt3 - dt2) / 60)
+    return render_template('teacher/exam_info.html', exam=exam, label=label, length=length, t=t)
 
 @teacher_bp.route('/show_exam/<int:paper_id>', methods=['GET', 'POST'])
 def show_exam(paper_id):

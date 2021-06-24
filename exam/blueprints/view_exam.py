@@ -18,6 +18,7 @@ def home():
 @view_exam_bp.route('/information/<int:paper_id>')
 def show_information(paper_id):
     exam = Paper.query.filter_by(paper_id=paper_id).first()
+    length = len(exam.problems)
     dt1 = time.time()
     dt2 = time.mktime(exam.strt_t.timetuple())  # 开始时间
     dt3 = time.mktime(exam.end_t.timetuple())  # 结束时间
@@ -29,4 +30,6 @@ def show_information(paper_id):
         label = 3
     else:
         label = 2
-    return render_template('exam/exam_info.html', exam=exam, label=label)
+    t = int(int(dt3-dt2)/60)
+    # print(t)
+    return render_template('exam/exam_info.html', exam=exam, label=label, length=length, t=t)
