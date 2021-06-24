@@ -18,6 +18,7 @@ def home():
 @take_exam_bp.route('/<int:exam_id>', methods=['GET', 'POST'])
 def take_exam(exam_id):
     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
+    paper = Paper.query.filter_by(paper_id=exam_id).first()
     length = len(problems)
     if request.method == 'POST':
         answerpaper = Anspaper(paper_id=exam_id)
@@ -46,12 +47,11 @@ def take_exam(exam_id):
             answerpaper.score_all = fullscore
         db.session.add(answerpaper)
         db.session.commit()
-        paper = Paper.query.filter_by(paper_id=exam_id).first()
         paper.end = True
         db.session.commit()
         flash('提交成功.')
         return redirect(url_for('view_exam.home'))
-    return render_template('exam/take_exam.html', problems=problems, exam_id=exam_id, length=length)
+    return render_template('exam/take_exam.html', exam=paper, problems=problems, exam_id=exam_id, length=length)
 
 
 @take_exam_bp.route('/show_exam/<int:exam_id>')

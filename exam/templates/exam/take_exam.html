@@ -12,10 +12,10 @@
     <div class="card bg-primary text-light">
         <div class="card-body row-cols-3 d-flex justify-content-between" style="padding-bottom: 0px;">
             <div class="row" style="text-align: left;">
-                <a><i class="icofont-arrow-left"></i> 返回</a>
+                <a href="{{ url_for('view_exam.show_information', paper_id=exam.paper_id)}}"><i class="icofont-arrow-left"></i> 返回</a>
             </div>
             <div class="row" style="text-align: center;">
-                <h5 class="mb-0 fw-bold ">测验名称</h5>
+                <h5 class="mb-0 fw-bold ">{{ exam.name }}</h5>
             </div>
             <div class="row" style="text-align: right">
                 <p>剩余时间：000:00</p>
@@ -28,7 +28,7 @@
     {% for problem in problems %}
         {% if problem.type == 0 %}
             <div class="card-body justify-content-between ">
-                <p>(题号)<span class="text-muted">[判断]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
+                <p>{{ loop.index}}<span class="text-muted">[判断]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
                     <input type="radio" id="q-1-1" name={{ problem.problem_id }} value="T">
                     <label for="q-1-1">正确</label>
@@ -40,7 +40,7 @@
             </div>
         {% elif problem.type == 1 %}
             <div class="card-body justify-content-between ">
-                <p>(题号)<span class="text-muted">[单选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
+                <p>{{ loop.index}}<span class="text-muted">[单选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
                     <input type="radio" id="q-1-1" name={{ problem.problem_id }} value="A">
                     <label for="q-1-1">A. {{problem.choice_A}}</label>
@@ -60,7 +60,7 @@
             </div>
         {% else %}
             <div class="card-body justify-content-between ">
-                <p>(题号)<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
+                <p>{{ loop.index}}<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
                     <input type="checkbox" id="q-1-1" name="{{ problem.problem_id }}" value="A">
                     <label for="q-1-1">A. {{ problem.choice_A}}</label>
