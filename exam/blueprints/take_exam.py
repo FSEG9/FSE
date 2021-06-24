@@ -56,6 +56,13 @@ def take_exam(exam_id):
 
 @take_exam_bp.route('/show_exam/<int:exam_id>')
 def show_exam(exam_id):
+    paper = Paper.query.filter_by(paper_id=exam_id).first()
     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
-    return render_template('exam/show_list.html', problems=problems)
+    answerpaper = Anspaper.query.filter_by(paper_id=paper.paper_id).first() #有学生id之后再改
+    for problem in problems:
+        answer = answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer
+        right = problem.solution
+        # if answer==right:
+
+    return render_template('exam/show_list.html', problems=problems, exam=paper, answerpaper=answerpaper)
 
