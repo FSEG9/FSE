@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block jump %}
+    <meta http-equiv="refresh" content="{{ t }};url={{ url_for('view_exam.show_information', paper_id=exam.paper_id) }}">
+{% endblock %}
+
 {% block title %}题目列表{% endblock %}
 
 {% block content %}
