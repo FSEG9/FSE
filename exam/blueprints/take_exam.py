@@ -6,6 +6,7 @@ from exam.forms.answer import PaperForm, AnswerForm
 from exam.models.exam import exam_has_problem, Paper
 from exam.models.problem import Problem
 from exam.models.answer import Anspa_prob_answer, Anspaper
+import time
 
 take_exam_bp = Blueprint('take_exam', __name__)
 
@@ -20,6 +21,10 @@ def take_exam(exam_id):
     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
     paper = Paper.query.filter_by(paper_id=exam_id).first()
     length = len(problems)
+    dt3 = time.mktime(paper.end_t.timetuple())
+    dt1 = time.time()
+    t = int(dt3-dt1)
+    # print(t)
     if request.method == 'POST':
         answerpaper = Anspaper(paper_id=exam_id)
         db.session.add(answerpaper)
@@ -51,7 +56,7 @@ def take_exam(exam_id):
         db.session.commit()
         flash('提交成功.')
         return redirect(url_for('view_exam.home'))
-    return render_template('exam/take_exam.html', exam=paper, problems=problems, exam_id=exam_id, length=length)
+    return render_template('exam/take_exam.html', exam=paper, problems=problems, exam_id=exam_id, length=length, t=t)
 
 
 @take_exam_bp.route('/show_exam/<int:exam_id>')

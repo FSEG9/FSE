@@ -18,7 +18,14 @@
                 <h5 class="mb-0 fw-bold ">{{ exam.name }}</h5>
             </div>
             <div class="row" style="text-align: right">
-                <p>剩余时间：000:00</p>
+                <div id="datetime">
+                    <input type="hidden" name="t" value={{ t }}>
+                    <script>
+                    window.onload = function(){
+                          showtime("tsa");
+                    }
+                    </script>
+                </div>
             </div>
         </div>
     </div>
