@@ -11,7 +11,7 @@ exam_has_anspaper = db.Table(
 class Anspaper(db.Model):
     anspaper_id = db.Column(db.Integer, nullable=False, primary_key=True)
     paper_id = db.Column(db.Integer, db.ForeignKey('paper.paper_id'))
-    student_id = db.Column(db.Integer, nullable=False)
+    student_id = db.Column(db.Integer)
     score_all = db.Column(db.Integer)
     Answers = db.relationship("Anspa_prob_answer", lazy='dynamic')
 

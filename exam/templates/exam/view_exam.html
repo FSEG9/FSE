@@ -29,8 +29,14 @@
                                             <td>
                                                 <a href="{{ url_for('view_exam.show_information', paper_id = exam.paper_id) }}" class="name_QIjv7">{{ exam.name }}</a>
                                             </td>
+                                            <td>开始时间:{{ exam.strt_t }}</td>
                                             <td>结束时间:{{ exam.end_t }}</td>
+                                        {% if exam.end %}
+                                            <td>
+                                                得分：{{ exam.anspapers.filter_by(student_id=1).first().score_all }}
+                                            </td>
                                         </tr>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
 

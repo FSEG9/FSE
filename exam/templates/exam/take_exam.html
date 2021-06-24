@@ -22,7 +22,7 @@
                     <input type="hidden" name="t" value={{ t }}>
                     <script>
                     window.onload = function(){
-                          showtime("tsa");
+                          showtime(document.getElementsByName("t")[0].value);
                     }
                     </script>
                 </div>

@@ -3,6 +3,7 @@ from exam import db
 from exam.models.exam import Paper, exam_has_problem
 from flask import render_template, request, flash, redirect, url_for
 from datetime import datetime
+from exam.models.answer import Anspa_prob_answer, Anspaper
 import time
 
 view_exam_bp = Blueprint('view_exam', __name__)
