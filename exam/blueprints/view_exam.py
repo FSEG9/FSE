@@ -26,6 +26,7 @@ def show_information(paper_id):
     dt1 = time.time()
     dt2 = time.mktime(exam.strt_t.timetuple())  # 开始时间
     dt3 = time.mktime(exam.end_t.timetuple())  # 结束时间
+    anspapers = exam.anspapers.order_by(Anspaper.score_all)
     if dt1>dt3:
         label = 1
     elif dt1<dt2:
@@ -36,4 +37,4 @@ def show_information(paper_id):
         label = 2
     t = int(int(dt3-dt2)/60)
     # print(t)
-    return render_template('exam/exam_info.html', exam=exam, label=label, length=length, t=t)
+    return render_template('exam/exam_info.html', exam=exam, label=label, length=length, t=t, anspapers=anspapers)

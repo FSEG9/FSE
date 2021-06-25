@@ -14,7 +14,7 @@
         </div>
     {% endfor %}
     <div class="card bg-primary text-light">
-        <div class="card-body row-cols-3 d-flex justify-content-between" style="padding-bottom: 0px;">
+        <div class="card-body row-cols-3 d-flex justify-content-between" style="padding-bottom: 0px; height: 50px">
             <div class="row" style="text-align: left;">
                 <a href="{{ url_for('view_exam.show_information', paper_id=exam.paper_id)}}"><i class="icofont-arrow-left"></i> 返回</a>
             </div>
@@ -38,7 +38,8 @@
     <br />
     {% for problem in problems %}
         {% if problem.type == 0 %}
-            <div class="card-body justify-content-between ">
+            <div class="card bg-light" style="margin-bottom: 10pt;">
+                <div class="card-body justify-content-between ">
                 <p>{{ loop.index}}<span class="text-muted">[判断]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
                     <input type="radio" id="q-1-1" name={{ problem.problem_id }} value="T">
@@ -48,9 +49,11 @@
                     <input type="radio" id="q-1-2" name={{ problem.problem_id }} value="F">
                     <label for="q-1-2">错误</label>
                 </p>
+                </div>
             </div>
         {% elif problem.type == 1 %}
-            <div class="card-body justify-content-between ">
+            <div class="card bg-light" style="margin-bottom: 10pt;">
+                <div class="card-body justify-content-between ">
                 <p>{{ loop.index}}<span class="text-muted">[单选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
                     <input type="radio" id="q-1-1" name={{ problem.problem_id }} value="A">
@@ -68,9 +71,11 @@
                     <input type="radio" id="q-1-4" name={{ problem.problem_id }} value="D">
                     <label for="q-1-4">D. {{problem.choice_D}}</label>
                 </p>
+                </div>
             </div>
         {% else %}
-            <div class="card-body justify-content-between ">
+            <div class="card bg-light" style="margin-bottom: 10pt;">
+                <div class="card-body justify-content-between ">
                 <p>{{ loop.index}}<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
                     <input type="checkbox" id="q-1-1" name="{{ problem.problem_id }}" value="A">
@@ -88,6 +93,7 @@
                     <input type="checkbox" id="q-1-4" name="{{ problem.problem_id }}" value="D">
                     <label for="q-1-4">D. {{ problem.choice_D}}</label>
                 </p>
+                </div>
             </div>
         {% endif %}
     {% endfor %}

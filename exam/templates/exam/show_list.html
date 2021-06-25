@@ -16,64 +16,125 @@
             </div>
         </div>
     </div>
-
 <form method="get">
     <br />
     {% for problem in problems %}
         {% if problem.type == 0 %}
-            <div class="card-body justify-content-between ">
-                <p>{{ loop.index}}<span class="text-muted">[判断]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
+            <div class="card bg-light" style="margin-bottom: 10pt;">
+                <div class="card-body justify-content-between ">
+                <p>{{ loop.index }}.<span class="text-muted">[判断]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
                 <p>
-                    T
+                    {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer == 'T' %}
+                        <input type="radio" disabled checked />
+                    {% else %}
+                        <input type="radio" disabled />
+                    {% endif %}
+                    正确
                 </p>
                 <p style="margin-bottom: 0px">
-                    F
-                </p>
+                    {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer == 'F' %}
+                        <input type="radio" disabled checked />
+                    {% else %}
+                        <input type="radio" disabled />
+                    {% endif %}
+                    错误
+                </p></p>
+                {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().score != 0 %}
+                    <div style="background-color:#eeeeee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答正确，得 1 分</p></div>
+                {% else %}
+                    <div class="text-light" style="background-color:#FA5F55;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答错误，得 0 分<br />　正确答案：{{ problem.solution }}</p></div>
+                {% endif %}
             </div>
+        </div>
         {% elif problem.type == 1 %}
-            <div class="card-body justify-content-between ">
-                <p>{{ loop.index}}<span class="text-muted">[单选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
-                <p>
-                    A. {{problem.choice_A}}
-                </p>
-                <p>
-                     B. {{problem.choice_B}}
-                </p>
-                <p>
-                    C. {{problem.choice_C}}
-                </p>
-                <p style="margin-bottom: 0px">
-                    D. {{problem.choice_D}}
-                </p>
+            <div class="card bg-light " style="margin-bottom: 10pt;">
+                <div class="card-body justify-content-between ">
+                    <p>{{ loop.index }}.<span class="text-muted">[单选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
+                    <p>
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer == 'A' %}
+                        <input type="radio" disabled checked />
+                        {% else %}
+                        <input type="radio" disabled />
+                        {% endif %}
+                        A. {{problem.choice_A}}
+                    </p>
+                    <p>
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer == 'B' %}
+                        <input type="radio" disabled checked />
+                        {% else %}
+                        <input type="radio" disabled/>
+                        {% endif %}
+                        B. {{problem.choice_B}}
+                    </p>
+                    <p>
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer == 'C' %}
+                        <input type="radio" disabled checked />
+                        {% else %}
+                        <input type="radio" disabled/>
+                        {% endif %}
+                        C. {{problem.choice_C}}
+                    </p>
+                    <p >
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer == 'D' %}
+                        <input type="radio" disabled checked />
+                        {% else %}
+                        <input type="radio" disabled/>
+                        {% endif %}
+                        D. {{problem.choice_D}}
+                    </p>
+                    {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().score != 0 %}
+                        <div style="background-color:#eee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答正确，得 1 分</p></div>
+                    {% else %}
+                        <div class="text-light" style="background-color:#FA5F55;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答错误，得 0 分<br />　正确答案：{{ problem.solution }}</p></div>
+                    {% endif %}
+                </div>
             </div>
         {% else %}
-            <div class="card-body justify-content-between ">
-                <p>{{ loop.index}}<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(2分)</span></p>
-                <p>
-                    A. {{ problem.choice_A}}
-                </p>
-                <p>
-                     B. {{ problem.choice_B}}
-                </p>
-                <p>
-                    C. {{ problem.choice_C}}
-                </p>
-                <p style="margin-bottom: 0px">
-                    D. {{ problem.choice_D}}
-                </p>
+            <div class="card bg-light " style="margin-bottom: 10pt;">
+                <div class="card-body justify-content-between ">
+                    <p>{{ loop.index }}.<span class="text-muted">[多选]</span>{{problem.text}}<span class="text-muted">(1分)</span></p>
+                    <p>
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer.find('A') %}
+                        <input type="checkbox" disabled checked />
+                        {% else %}
+                        <input type="checkbox" disabled />
+                        {% endif %}
+                        A. {{problem.choice_A}}
+                    </p>
+                    <p>
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer.find('B') %}
+                        <input type="checkbox" disabled checked />
+                        {% else %}
+                        <input type="checkbox" disabled/>
+                        {% endif %}
+                        B. {{problem.choice_B}}
+                    </p>
+                    <p>
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer.find('C') %}
+                        <input type="checkbox" disabled checked />
+                        {% else %}
+                        <input type="checkbox" disabled/>
+                        {% endif %}
+                        C. {{problem.choice_C}}
+                    </p>
+                    <p >
+                        {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer.find('D') %}
+                        <input type="checkbox" disabled checked />
+                        {% else %}
+                        <input type="checkbox" disabled/>
+                        {% endif %}
+                        D. {{problem.choice_D}}
+                    </p>
+                    </p>
+                    {% if answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().score != 0 %}
+                        <div style="background-color:#eee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答正确，得 1 分</p></div>
+                    {% else %}
+                        <div class="text-light" style="background-color:#FA5F55;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">　回答错误，得 0 分<br />　正确答案：{{ problem.solution }}</p></div>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
-        <p style="margin-bottom: 0px">
-            正确答案：{{ problem.solution }}
-        </p>
-        <p style="margin-bottom: 0px">
-            您选择的答案：{{ answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer }}
-        </p>
-        <p style="margin-bottom: 0px">
-            您的得分为：{{ answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().score }}
-        </p>
     {% endfor %}
-
     <br />
 </form>
 {% endblock %}
