@@ -3,45 +3,144 @@
 {% block title %}显示考试{% endblock %}
 
 {% block content %}
-
     <div class="body d-flex py-lg-3 py-md-2">
-        <div class="container-xxl">
-            <div class="row align-items-center">
-                <div class="border-0 mb-4">
-                    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                        <h3 class="fw-bold mb-0">我发布的考试</h3>
-                        <div class="col-auto d-flex w-sm-100">
+            <div class="container-xxl">
+
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="fw-bold mb-0 py-3 pb-2">我发布的考试</h3>
+                            <div class="col-auto d-flex w-sm-100">
                             <a href="../manage_exam/gen_exam_home" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-plus-circle me-2 fs-6"></i>添加试卷</a>
+                            </div>
+                            <div class="col-auto py-2 w-sm-100">
+                                <ul class="nav nav-tabs tab-body-header rounded invoice-set" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#Invoice-All" role="tab">所有考试</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#Invoice-ING" role="tab">正在进行</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#Invoice-END" role="tab">已结束</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div> <!-- Row end  -->
-            <div class="row clearfix g-3">
-                <div class="col-sm-12">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
-                                <tbody>
-                                {% if not exams %}
-                                    <tr>
-                                        <td colspan="6">无考试</td>
-                                    </tr>
-                                {% else %}
-                                    {% for exam in exams %}
-                                        <tr>
-                                            <td>
-                                                <a href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}" class="name_QIjv7">{{ exam.name }}</a>
-                                            </td>
-                                            <td>结束时间:{{ exam.end_t }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                {% endif %}
-                                </tbody>
-                            </table>
+                </div> <!-- Row end  -->
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="Invoice-All">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 col-md-12">
+                                        {% if not exams %}
+                                            <tr>
+                                                <td colspan="6">无考试</td>
+                                            </tr>
+                                        {% else %}
+                                            {% for exam in exams %}
+                                                <div class="card mb-3">
+                                                    <div class="card-body d-sm-flex justify-content-between">
+                                                        <a href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}" class="d-flex">
+                                                            <div class="flex-fill ms-3 text-truncate">
+                                                                <h6 class="d-flex justify-content-between mb-0"><span>{{ exam.name }}</span></h6>
+                                                                <span class="text-muted">{{ exam.subject }}</span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="text-end d-none d-md-block">
+                                                            {% if time.time() < time.mktime(exam.strt_t.timetuple()) %}
+                                                                <p class="mb-1">未开始</p>
+                                                            {% elif time.time() > time.mktime(exam.end_t.timetuple())%}
+                                                                <p class="mb-1">已结束</p>
+                                                            {% else %}
+                                                                <p class="mb-1">正在进行</p>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer justify-content-between d-flex align-items-center">
+                                                        <div class="d-none d-md-block">
+                                                            <strong>测试结束时间：</strong>
+                                                            <span>{{ exam.end_t }}</span>
+                                                        </div>
+                                                        <div class="card-hover-show">
+                                                            <a class="btn btn-sm btn-white border lift" href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}">查看考试信息</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>  <!-- Row end  -->
+                            </div> <!-- tab end  -->
+
+                            <div class="tab-pane fade" id="Invoice-ING">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 col-md-12">
+                                            {% for exam in exams %}
+                                                {% if time.time() > time.mktime(exam.strt_t.timetuple()) and time.time() < time.mktime(exam.end_t.timetuple()) %}
+                                                    <div class="card mb-3">
+                                                        <div class="card-body d-sm-flex justify-content-between">
+                                                        <a href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}" class="d-flex">
+                                                            <div class="flex-fill ms-3 text-truncate">
+                                                                <h6 class="d-flex justify-content-between mb-0"><span>{{ exam.name }}</span></h6>
+                                                                <span class="text-muted">{{ exam.subject }}</span>
+                                                            </div>
+                                                        </a>
+                                                            <div class="text-end d-none d-md-block">
+                                                                <p class="mb-1">正在进行</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer justify-content-between d-flex align-items-center">
+                                                            <div class="d-none d-md-block">
+                                                                <strong>测试结束时间：</strong>
+                                                                <span>{{ exam.end_t }}</span>
+                                                            </div>
+                                                            <div class="card-hover-show">
+                                                                <a class="btn btn-sm btn-white border lift" href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}">查看考试信息</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </div>
+                                </div>  <!-- Row end  -->
+                            </div> <!-- tab end  -->
+
+                            <div class="tab-pane fade" id="Invoice-END">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 col-md-12">
+                                            {% for exam in exams %}
+                                                {% if time.time() > time.mktime(exam.end_t.timetuple()) %}
+                                                <div class="card mb-3">
+                                                    <div class="card-body d-sm-flex justify-content-between">
+                                                        <a href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}" class="d-flex">
+                                                            <div class="flex-fill ms-3 text-truncate">
+                                                                <h6 class="d-flex justify-content-between mb-0"><span>{{ exam.name }}</span></h6>
+                                                                <span class="text-muted">{{ exam.subject }}</span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="text-end d-none d-md-block">
+                                                                <p class="mb-1">已结束</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer justify-content-between d-flex align-items-center">
+                                                        <div class="d-none d-md-block">
+                                                            <strong>测试结束时间：</strong>
+                                                            <span>{{ exam.end_t }}</span>
+                                                        </div>
+                                                        <div class="card-hover-show">
+                                                            <a class="btn btn-sm btn-white border lift" href="{{ url_for('teacher.show_information', paper_id = exam.paper_id) }}">查看考试信息</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </div>
+                                </div>  <!-- Row end  -->
+                            </div> <!-- tab end  -->
+
                         </div>
                     </div>
-                </div>
-            </div><!-- Row End -->
+
+                </div> <!-- Row end  -->
+            </div>
         </div>
     </div>
 
