@@ -2,6 +2,9 @@ from flask import Blueprint
 from flask import render_template, request, flash, redirect, url_for
 from datetime import datetime
 import time
+
+from sqlalchemy import desc
+
 from exam import db
 from exam.models.exam import Paper
 from exam.models.answer import ProbAnalysis, Anspaper
@@ -11,8 +14,9 @@ teacher_bp = Blueprint('teacher', __name__)
 
 @teacher_bp.route('/', methods=['GET', 'POST'])
 def home():
-    exams = Paper.query.all()
-    return render_template('teacher/view_exam.html', exams=exams)
+    dt1 = time
+    exams = Paper.query.order_by(desc(Paper.end_t)).all()
+    return render_template('teacher/view_exam.html', exams=exams, time=dt1)
 
 @teacher_bp.route('/information/<int:paper_id>')
 def show_information(paper_id):
