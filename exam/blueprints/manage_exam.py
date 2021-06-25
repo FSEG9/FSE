@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, jsonify, redirect, url_for, flash
+import ast
+import re
+
+from flask import Blueprint, render_template, jsonify, redirect, url_for, flash, request
 from faker import Faker
 from exam import db
 from exam.forms.exam import generate_exam, search_add
@@ -10,69 +13,102 @@ manage_exam_bp = Blueprint('manage_exam', __name__)
 
 @manage_exam_bp.route('/gen_exam_home', methods=['GET', 'POST'])
 def home():
-    chosen_pro = Problem.query.filter(Problem.chosen == 1).all()
-    # print(chosen_pro)
+    chosen_proid = [0, 0]  # 保证传入的是列表
+    print(chosen_proid)
+    return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+
+
+@manage_exam_bp.route('/problem_add/<chosen_proid>', methods=['GET', 'POST'])
+def exam_search_add(chosen_proid):
+    chosen_proid = ast.literal_eval(chosen_proid)
+    problems = Problem.query.filter(~Problem.problem_id.in_(chosen_proid)).all()
+    if request.method == 'POST':
+        for problem in problems:
+            proid = request.form.getlist(str(problem.problem_id))
+            # print(proid)
+            if len(proid):
+                print(proid)
+                chosen_proid.append(proid[0])
+        return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+    print(chosen_proid)
+    return render_template('exam_view/exam_search_add.html', chosen_proid=chosen_proid, problems=problems)
+
+
+@manage_exam_bp.route('/added_paper/<chosen_proid>', methods=['GET', 'POST'])
+def paper_has_pro(chosen_proid):
+    print(chosen_proid)
     tags = Tag.query.all()
-    form = generate_exam()
-    fake = Faker()
-    if form.condition.data:
-        # print(form.chosenTag.data)
-        # print("1")
-        # print(form.num_problem.data)
-        # print("2")
-        chosen_tag = Tag.query.filter(Tag.tag_id == form.chosenTag.data).first()
-        num = form.num_problem.data
-        i=0
-        for problem in chosen_tag.problems:
-            if i == num:
-                break
-            i = i + 1
-            problem.chosen = 1
-        db.session.commit()
-    if form.submit.data:
-        # try:
-            start_time = form.start_date.data + "-" + form.start_time.data
-            end_time = form.end_date.data + "-" + form.end_time.data
+    # chosen_proid = re.findall(r'\d', chosen_proid)
+    print(len(chosen_proid))
+    chosen_proid = ast.literal_eval(chosen_proid)
+    problems = []
+    if len(chosen_proid) != 2:
+        problems = Problem.query.filter(Problem.problem_id.in_(chosen_proid))
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            print("取消")
+            return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+        if request.form.get('gen_exam'):
+            print("提交生成测试")
+            if request.method == 'POST':
+                name = request.form.get('name')
+                subject = request.form.get('subject')
+                start_date = request.form.get('start_date')
+                start_time = request.form.get('start_time')
+                end_date = request.form.get('end_date')
+                end_time = request.form.get('end_time')
+                print(name)
+                print(subject)
+                print(start_time)
+                if len(name) and len(subject) and len(start_date) and len(end_date):
+                    print("222222")
+                    start_time = start_date + "-" + start_time
+                    end_time = end_date + "-" + end_time
+                    fake = Faker()
+                    id = fake.pyint()
+                    while Paper.query.filter(Paper.paper_id == id).first() is not None:
+                        id = fake.pyint()
+                    paper = Paper(name=name, paper_id=id, subject=subject, strt_t=start_time,
+                                  end_t=end_time
+                                  )
+                    for problem in problems:
+                        paper.problems.append(problem)
+                    db.session.add(paper)
+                    db.session.commit()
 
-            paper = Paper(name=form.name.data, paper_id=fake.pyint(), subject=form.subject.data, strt_t=start_time,
-                          end_t=end_time
-                          )
-            # print("bbb")
-            if len(chosen_pro):
-                for item in chosen_pro:
-                    paper.problems.append(item)
-                # print("aaa")
-            db.session.add(paper)
-            db.session.commit()
-            for problem in chosen_pro:
-                problem.chosen = False
-            db.session.commit()
-            flash('生成成功')
-        # except Exception as e:
-        #     flash('错误操作')  # to be continued: error page...
-    return render_template('exam_view/gen_exam.html', form=form, tags=tags, chosen_pro=chosen_pro)
-
-
-@manage_exam_bp.route('/problem/add', methods=['GET', 'POST'])
-def exam_search_add():
-    form = search_add()
-    problems = Problem.query.all()
-    if form.submit.data:
-        return redirect(url_for('.home'))
-    return render_template('exam_view/exam_search_add.html', form=form, problems=problems)
-
-
-# 选择题目加入试卷
-@manage_exam_bp.route('/problem/<int:problem_id>/choose', methods=['PATCH'])
-# @login_required
-def choose_prob(problem_id):
-    problem = Problem.query.get_or_404(problem_id)
-    problem.chosen = not problem.chosen  # 试卷加入题目
-    db.session.commit()
-    return jsonify(message=_('Problem Chosen.'))
-
-
-@manage_exam_bp.route('/select_condition', methods=['GET'])
-# @login_required
-def select_condition():
-    return render_template('exam_view/auto_condition_select.html')
+                    flash('生成成功')
+                    chosen_proid = []
+                    return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+                else:
+                    flash('请填入完整信息')
+                    print('请填入完整信息')
+                    return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+        if request.form.get('auto_select_submit'):
+            print("提交自动选择条件")
+            chosen_tag = Tag.query.filter(Tag.tag_id == request.form.get('chosenTag')).first()
+            chosen_type = request.form.get('type_problem')
+            chosen_type = int(chosen_type)
+            num = request.form.get('num_problem')
+            num = int(num)
+            i = 0
+            for problem in chosen_tag.problems:
+                if i == num:
+                    break
+                if chosen_type == -1:
+                    i = i + 1
+                    chosen_proid.append(problem.problem_id)
+                    continue
+                if problem.type == chosen_type:
+                    i = i + 1
+                    chosen_proid.append(problem.problem_id)
+            return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+        else:
+            print("删除题目")
+            for problem in problems:
+                name = problem.problem_id
+                if request.form.get(str(name)):
+                    chosen_proid.remove(problem.problem_id)
+                    print("-------")
+                    break
+            return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+    return render_template('exam_view/gen_exam.html', tags=tags, chosen_proid=chosen_proid, problems=problems)

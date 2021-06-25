@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}修改题目{% endblock %}
@@ -9,122 +10,111 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}
-    <form method="post" action="{{ url_for('manage_exam.home') }}">
-    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-        <h3 class="fw-bold mb-0">生成测试</h3>
-        <div class="col-auto d-flex w-sm-100">
-            <a href="{{ url_for('.exam_search_add') }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-plus-circle me-2 fs-6"></i>添加题目</a>
-
-
-        </div>
-        <input type="submit" class="btn btn-dark btn-set-task w-sm-100" name="submit" value="生成试卷">
-
-
-
+    <form method="post">
+        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+            <h3 class="fw-bold mb-0">生成测试</h3>
+            <a href="{{ url_for('.exam_search_add',chosen_proid=chosen_proid) }}" class="btn btn-dark btn-set-task w-sm-100"><i class="icofont-plus-circle me-2 fs-6"></i>添加题目</a>
+            <input type="submit" name="gen_exam" class="btn btn-dark btn-set-task w-sm-100" value="生成测试">
         <!-- Button trigger modal -->
-        <input type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="自动选题">
-
-
+            <input type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="自动选题">
         <!-- Modal -->
-
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">自动选题</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <select class="form-select" aria-label="Default select Project Category" name="chosenTag">
-                    {% for tag in tags %}
-                        <option value={{tag.tag_id}}>{{tag.tag_name}}</option>
-                    {% endfor %}}
-                </select>
-                  <br/>
-                  <label>
-                      <input type="text" class="form-control form-control-sm" name="num_problem" placeholder="题目数量" aria-controls="myProjectTable">
-                  </label>
-              </div>
-              <div class="modal-footer">
-                <input type="submit" class="btn btn-secondary" name="condition" value="提交">
-                <input type="submit" class="btn btn-primary" value="取消">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">自动选题</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <select class="form-select" aria-label="Default select Project Category" name="chosenTag">
+                        {% for tag in tags %}
+                            <option value={{tag.tag_id}}>{{tag.tag_name}}</option>
+                        {% endfor %}}
+                    </select>
+                      <br/>
+                      <label>
+                          <input type="text" class="form-control form-control-sm" name="num_problem" placeholder="题目数量" aria-controls="myProjectTable">
+                      </label>
+                      <label>
+                          <select class="form-select" aria-label="Default select Project Category" name="type_problem">
+                                            <option value="-1">不限题型</option>
+                                            <option value="0">判断题</option>
+                                            <option value="1">单选题</option>
+                                            <option value="2" >多选题</option>
+                                        </select>
+                      </label>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit"  class="btn btn-secondary" name="auto_select_submit" value="提交">
+                    <input type="submit" class="btn btn-primary" name="cancel" value="取消">
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
         </div>
-
-
-
-    </div>
 
 
 
         <tbody>
-        <div class="card-body">
-            <div id="myProjectTable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="myProjectTable" class="table table-hover align-middle mb-0 nowrap dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="myProjectTable_info">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 175.2px;" aria-sort="ascending" aria-label="Project Name: activate to sort column descending">学科</th>
-                                    <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Thur: activate to sort column ascending">试卷名称</th>
-                                    <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Mon: activate to sort column ascending">开始时间</th><th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Tue: activate to sort column ascending"></th>
-                                    <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Wed: activate to sort column ascending">结束时间</th><th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Thur: activate to sort column ascending"></th>
-                            </thead>
-                        <tbody>
-                            <tr role="row" class="odd parent">
-                                <td tabindex="0" class="sorting_1" style="">
-                                    <select class="form-select" aria-label="Default select Project Category" name="subject">
-                                        <option selected="">数据结构</option>
-                                        <option value="1">数据库系统</option>
-                                        <option value="2">面向对象程序设计</option>
-                                        <option value="3">Java</option>
-                                        <option value="4">C++</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control form-control-sm" name="name" placeholder="" aria-controls="myProjectTable">
-                                </td>
+            <div class="card-body">
+                <div id="myProjectTable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="myProjectTable" class="table table-hover align-middle mb-0 nowrap dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="myProjectTable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 175.2px;" aria-sort="ascending" aria-label="Project Name: activate to sort column descending">学科</th>
+                                        <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Thur: activate to sort column ascending">试卷名称</th>
+                                        <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Mon: activate to sort column ascending">开始时间</th><th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Tue: activate to sort column ascending"></th>
+                                        <th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Wed: activate to sort column ascending">结束时间</th><th class="sorting" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 123.2px;" aria-label="Thur: activate to sort column ascending"></th>
+                                </thead>
+                            <tbody>
+                                <tr role="row" class="odd parent">
+                                    <td tabindex="0" class="sorting_1" style="">
+<!--                                        subject 根据课程选择子系统来显示-->
+                                        <select class="form-select" aria-label="Default select Project Category" name="subject">
+                                            <option selected="">数据结构</option>
+                                            <option value="1">数据库系统</option>
+                                            <option value="2">面向对象程序设计</option>
+                                            <option value="3">Java</option>
+                                            <option value="4">C++</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" name="name" placeholder="" aria-controls="myProjectTable">
+                                    </td>
 
-                                <td>
-                                    <input type="date" class="form-control" id="timepickerded30" name="start_date">
-                                </td>
-                                <td>
-                                    <input type="time" class="form-control" id="timepickerded31" value="08:00:00" name="start_time">
-                                </td>
-                                <td>
-                                    <input type="date" class="form-control" id="timepickerded32" name="end_date">
-                                </td>
-                                <td>
-                                    <input type="time" class="form-control" id="timepickerded33" value="08:00:00" name="end_time">
-                                </td>
-
-
-                            </tr>
-
-                                {% if not chosen_pro %}
+                                    <td>
+                                        <input type="date" class="form-control" id="timepickerded30" name="start_date">
+                                    </td>
+                                    <td>
+                                        <input type="time" class="form-control" id="timepickerded31" value="08:00:00" name="start_time">
+                                    </td>
+                                    <td>
+                                        <input type="date" class="form-control" id="timepickerded32" name="end_date">
+                                    </td>
+                                    <td>
+                                        <input type="time" class="form-control" id="timepickerded33" value="08:00:00" name="end_time">
+                                    </td>
+                                </tr>
+                                {% if not problems %}
                                     <tr>
                                         <td colspan="6">无题目</td>
                                     </tr>
                                 {% else %}
-                                    {% for problem in chosen_pro %}
+                                    {% for problem in problems %}
                                         {% include 'exam_view/_problem_display.html' %}
                                     {% endfor %}
                                 {% endif %}
-
-
-
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-
-
-
         </tbody>
-
     </form>
 {% endblock %}
+{% block plugin_js %}
+<script src="{{ url_for('static', filename='bundles/dataTables.bundle.js') }}"></script>
+{% endblock %}
+
