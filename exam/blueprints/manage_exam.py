@@ -61,7 +61,7 @@ def paper_has_pro(chosen_proid):
                 print(name)
                 print(subject)
                 print(start_time)
-                if len(name) and len(subject) and len(start_date) and len(end_date):
+                if len(chosen_proid) != 2 and len(name) and len(subject) and len(start_date) and len(end_date) :
                     print("222222")
                     start_time = start_date + "-" + start_time
                     end_time = end_date + "-" + end_time
@@ -80,9 +80,10 @@ def paper_has_pro(chosen_proid):
                     flash('生成成功')
                     chosen_proid = [0,0]
                     return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+                elif len(chosen_proid) == 2:
+                    flash('请添加题目')
                 else:
                     flash('请填入完整信息')
-                    print('请填入完整信息')
                     return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         if request.form.get('auto_select_submit'):
             print("提交自动选择条件")
