@@ -46,7 +46,11 @@
                                                                 <p class="mb-1">未开始</p>
                                                             {% elif time.time() > time.mktime(exam.end_t.timetuple())%}
                                                                 <p class="mb-1">已结束</p>
+                                                                {% if exam.anspapers.filter_by(student_id=1).first() is none %}
+                                                                <span class="text-muted">得分：0</span>
+                                                                {% else %}
                                                                 <span class="text-muted">得分：{{ exam.anspapers.filter_by(student_id=1).first().score_all }}</span>
+                                                                {% endif %}    
                                                             {% else %}
                                                                 <p class="mb-1">正在进行</p>
                                                             {% endif %}
@@ -120,7 +124,11 @@
                                                         </a>
                                                         <div class="text-end d-none d-md-block">
                                                             <p class="mb-1">已结束</p>
-                                                            <span class="text-muted">得分：{{ exam.anspapers.filter_by(student_id=1).first().score_all }}</span>
+                                                            {% if exam.anspapers.filter_by(student_id=1).first() is none %}
+                                                                <span class="text-muted">得分：0</span>
+                                                            {% else %}
+                                                                <span class="text-muted">得分：{{ exam.anspapers.filter_by(student_id=1).first().score_all }}</span>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="card-footer justify-content-between d-flex align-items-center">
