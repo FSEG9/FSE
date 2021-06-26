@@ -33,7 +33,7 @@
                     </select>
                       <br/>
                       <label>
-                          <input required type="number" class="form-control form-control-sm"  name="num_problem" placeholder="题目数量" aria-controls="myProjectTable">
+                          <input type="number" min="0" class="form-control form-control-sm"  name="num_problem" placeholder="题目数量" value="0" aria-controls="myProjectTable">
                       </label>
                       <label>
                           <select class="form-select" aria-label="Default select Project Category" name="type_problem">
@@ -60,7 +60,7 @@
                 <div id="myProjectTable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="myProjectTable" class="table table-hover align-middle mb-0 nowrap dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="myProjectTable_info">
+                            <table id="myProjectTable0" class="table table-hover align-middle mb-0 nowrap dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="myProjectTable_info">
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="myProjectTable" rowspan="1" colspan="1" style="width: 175.2px;" aria-sort="ascending" aria-label="Project Name: activate to sort column descending">学科</th>
@@ -81,14 +81,14 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input required type="text" class="form-control form-control-sm" name="name" placeholder="" aria-controls="myProjectTable">
+                                        <input type="text" class="form-control form-control-sm" name="name" placeholder="" aria-controls="myProjectTable">
                                     </td>
 
                                     <td>
-                                        <input required type="date" class="form-control" id="timepickerded30" name="start_date">
+                                        <input type="date" class="form-control" id="timepickerded30" name="start_date" >
                                     </td>
                                     <td>
-                                        <input required type="time" class="form-control" id="timepickerded31" value="08:00:00" name="start_time">
+                                        <input type="time" class="form-control" id="timepickerded31" value="08:00:00" name="start_time">
                                     </td>
                                     <td>
                                         <input type="date" class="form-control" id="timepickerded32" name="end_date">
@@ -100,7 +100,7 @@
 
                             </table>
                             <br/>
-                            <table id="myProjectTable1" class="table table-hover align-middle mb-0" style="width:100%">
+                            <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>

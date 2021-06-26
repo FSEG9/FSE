@@ -94,6 +94,8 @@ def paper_has_pro(chosen_proid):
             num = int(num)
             i = 0
             for problem in chosen_tag.problems:
+                if problem.problem_id in chosen_proid:
+                    continue
                 if i == num:
                     break
                 if chosen_type == -1:
