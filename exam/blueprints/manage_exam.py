@@ -50,7 +50,7 @@ def paper_has_pro(chosen_proid):
             print("取消")
             return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         if request.form.get('clear'):
-            chosen_proid = [0,0]
+            chosen_proid = [0, 0]
             return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         if request.form.get('gen_exam'):
             print("提交生成测试")
@@ -64,10 +64,12 @@ def paper_has_pro(chosen_proid):
                 print(name)
                 print(subject)
                 print(start_time)
-                if len(chosen_proid) != 2 and len(name) and len(subject) and len(start_date) and len(end_date) :
+                start_time = start_date + "-" + start_time
+                end_time = end_date + "-" + end_time
+                if end_time > start_time and len(chosen_proid) != 2 and len(name) and len(subject) and len(
+                        start_date) and len(end_date):
                     print("222222")
-                    start_time = start_date + "-" + start_time
-                    end_time = end_date + "-" + end_time
+
                     fake = Faker()
                     id = fake.pyint()
                     while Paper.query.filter(Paper.paper_id == id).first() is not None:
@@ -81,8 +83,10 @@ def paper_has_pro(chosen_proid):
                     db.session.commit()
 
                     flash('生成成功')
-                    chosen_proid = [0,0]
+                    chosen_proid = [0, 0]
                     return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+                elif end_time <= start_time:
+                    flash('测试结束时间必须晚于开始时间')
                 elif len(chosen_proid) == 2:
                     flash('请添加题目')
                 else:
@@ -108,8 +112,8 @@ def paper_has_pro(chosen_proid):
                 if problem.type == chosen_type:
                     i = i + 1
                     chosen_proid.append(problem.problem_id)
-            if i<num-1:
-                flash('题目数量不足 仅加入'+str(i)+'道题')
+            if i < num - 1:
+                flash('题目数量不足 仅加入' + str(i) + '道题')
             return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         else:
             print("删除题目")
