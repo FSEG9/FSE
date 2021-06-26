@@ -27,6 +27,18 @@ def check_has_choice(message=None):
     return _check_has_choice
 
 
+def check_len_below_200(message=None):
+    """验证器：长度在 200 以下"""
+    if message is None:
+        message = '题干字数不能超过 200。'
+
+    def _check_len_below_200(form, field):
+        if len(field.data) >= 200:
+            raise ValidationError(message);
+
+    return _check_len_below_200
+
+
 def check_solution(message=None):
     """验证器：答案必须为 T/F/A/B/C/D/AB/BC/CD/AC/BD/AD/ABC/ABD/ACD/BCD/ABCD"""
 
@@ -46,10 +58,10 @@ class ProblemForm(FlaskForm):
     problem_id = IntegerField('编号', render_kw={'hidden': ''})
     type = SelectField('题目类型', choices=[('0', '判断'), ('1', '单选'), ('2', '多选')])
     text = TextAreaField('题干', validators=[text_not_empty()])
-    choice_A = StringField('选项 A', validators=[check_has_choice()])
-    choice_B = StringField('选项 B', validators=[check_has_choice()])
-    choice_C = StringField('选项 C', validators=[check_has_choice()])
-    choice_D = StringField('选项 D', validators=[check_has_choice()])
+    choice_A = StringField('选项 A', validators=[check_has_choice(), check_len_below_200()])
+    choice_B = StringField('选项 B', validators=[check_has_choice(), check_len_below_200()])
+    choice_C = StringField('选项 C', validators=[check_has_choice(), check_len_below_200()])
+    choice_D = StringField('选项 D', validators=[check_has_choice(), check_len_below_200()])
     solution = StringField('答案', validators=[check_solution()])
     adder = HiddenField('添加人', default='Default User')  # TODO: 添加登录验证
     tags = StringField('标签（多个标签用空格分隔）')
