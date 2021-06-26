@@ -24,6 +24,8 @@ def take_exam(exam_id):
     length = len(problems)
     dt3 = time.mktime(paper.end_t.timetuple())
     dt1 = time.time()
+    if dt1 > dt3:
+        return redirect(url_for('take_exam.show_exam',exam_id=exam_id))
     t = int(dt3-dt1)
     # print(t)
     if request.method == 'POST':
