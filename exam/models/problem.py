@@ -20,7 +20,6 @@ class Problem(db.Model):
     choice_D = db.Column(db.String(200))
     solution = db.Column(db.String(5), nullable=False)
     adder = db.Column(db.String(20))  # 添加人
-    chosen = db.Column(db.Boolean, nullable=False, default=0, index=True)  # 记录题目是否被选中，生成试卷提交后全部清零
     tags = db.relationship('Tag',
                            secondary=problem_has_tag,
                            back_populates='problems')
