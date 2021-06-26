@@ -85,13 +85,13 @@ def paper_has_pro(chosen_proid):
                     flash('生成成功')
                     chosen_proid = [0, 0]
                     return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
-                elif end_time <= start_time:
-                    flash('测试结束时间必须晚于开始时间')
                 elif len(chosen_proid) == 2:
                     flash('请添加题目')
-                else:
+                elif len(name)==0 or len(subject)==0 or len(start_date)==0 or len(end_date)==0:
                     flash('请填入完整信息')
-                    return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+                else:
+                    flash('测试结束时间必须晚于开始时间')
+                return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         if request.form.get('auto_select_submit'):
             print("提交自动选择条件")
             chosen_tag = Tag.query.filter(Tag.tag_id == request.form.get('chosenTag')).first()
