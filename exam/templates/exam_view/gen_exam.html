@@ -33,7 +33,7 @@
                     </select>
                       <br/>
                       <label>
-                          <input type="text" class="form-control form-control-sm" name="num_problem" placeholder="题目数量" aria-controls="myProjectTable">
+                          <input required type="number" class="form-control form-control-sm"  name="num_problem" placeholder="题目数量" aria-controls="myProjectTable">
                       </label>
                       <label>
                           <select class="form-select" aria-label="Default select Project Category" name="type_problem">
@@ -97,7 +97,22 @@
                                         <input type="time" class="form-control" id="timepickerded33" value="08:00:00" name="end_time">
                                     </td>
                                 </tr>
-                                {% if not problems %}
+
+                            </table>
+                            <br/>
+                            <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>类型</th>
+                                        <th>题干</th>
+                                        <th>标签</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                            {% if not problems %}
                                     <tr>
                                         <td colspan="6">无题目</td>
                                     </tr>
@@ -105,8 +120,7 @@
                                     {% for problem in problems %}
                                         {% include 'exam_view/_problem_display.html' %}
                                     {% endfor %}
-                                {% endif %}
-                            </table>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
