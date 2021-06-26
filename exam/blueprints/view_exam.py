@@ -26,9 +26,18 @@ def show_information(paper_id):
     dt1 = time.time()
     dt2 = time.mktime(exam.strt_t.timetuple())  # 开始时间
     dt3 = time.mktime(exam.end_t.timetuple())  # 结束时间
-    anspapers = exam.anspapers.order_by(Anspaper.score_all)
+    anspapers = Anspaper.query.filter_by(paper_id=paper_id).order_by(desc(Anspaper.score_all)).all()
     if dt1>dt3:
         label = 1
+        prescore = -1  # 记录前一人的分数
+        rank_count = 1
+        for anspaper in anspapers:  # 计算平均分
+            if anspaper.score_all != prescore:
+                rank = rank_count
+            rank_count += 1
+            anspaper.Ranknum = rank
+            prescore = anspaper.score_all
+        db.session.commit()
     elif dt1<dt2:
         label = 0
     elif exam.end:

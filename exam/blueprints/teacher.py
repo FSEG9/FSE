@@ -26,11 +26,20 @@ def show_information(paper_id):
     dt2 = time.mktime(exam.strt_t.timetuple())  # 开始时间
     dt3 = time.mktime(exam.end_t.timetuple())  # 结束时间
     length = len(exam.problems)
-    anspapers = exam.anspapers.order_by(Anspaper.score_all)
+    anspapers = Anspaper.query.filter_by(paper_id=paper_id).order_by(desc(Anspaper.score_all)).all()
     if dt1<dt2:
         label = 0
     elif dt1>dt3:
         label = 2
+        prescore = -1 #记录前一人的分数
+        rank_count = 1
+        for anspaper in anspapers:#计算平均分
+            if anspaper.score_all != prescore:
+                rank = rank_count
+            rank_count += 1
+            anspaper.Ranknum = rank
+            prescore = anspaper.score_all
+        db.session.commit()
     else:
         label = 1
     t = int(int(dt3 - dt2) / 60)
@@ -42,7 +51,7 @@ def show_exam(paper_id):
     exam = Paper.query.filter_by(paper_id=paper_id).first()
     problems = exam.problems
     if exam.anlsflag == False:#每道题的解答结果还未分析
-        answerpapers = Anspaper.query.filter_by(paper_id=paper_id).all()
+        answerpapers = Anspaper.query.filter_by(paper_id=paper_id).order_by(desc(Anspaper.score_all)).all()
         totalnum = Anspaper.query.filter_by(paper_id=paper_id).count()
         totalscore = 0
         for answerpaper in answerpapers:#计算平均分
@@ -88,13 +97,13 @@ def show_exam(paper_id):
                 for answerpaper in answerpapers:
                     answer = answerpaper.Answers.filter_by(problem_id = problem.problem_id).first().answer
                     totalscore += answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().score
-                    if answer == "A":
+                    if answer.find('A'):
                         a_count += 1
-                    elif answer == "B":
+                    if answer.find('B'):
                         b_count += 1
-                    elif answer == "C":
+                    if answer.find('C'):
                         c_count += 1
-                    elif answer == "D":
+                    if answer.find('D'):
                         d_count += 1
                     if len(answer) == 0:
                         null_count += 1
