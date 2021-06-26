@@ -29,7 +29,7 @@
                 {% if label == 0 %}
                     <div>考试尚未开始</div>
                 {% elif label == 1 %}
-                    <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:100pt;" target="_blank" >查看试卷</a>
+                    <a href="{{ url_for('take_exam.show_exam', exam_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:100pt;" >查看试卷</a>
                     <div class="row clearfix g-3"  style="margin-top:10pt;">
                     <div class="col-sm-12">
                         <div class="card mb-3">
@@ -64,7 +64,7 @@
                     </div>
                 </div><!-- Row End -->
                 {% elif label == 2 %}
-                    <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:100pt;" target="_blank" >开始答题</a>
+                    <a href="{{ url_for('take_exam.take_exam', exam_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:100pt;" >开始答题</a>
                 {% elif label == 3 %}
                     <div>考试已结束</div>
                 {% endif %}

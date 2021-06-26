@@ -31,7 +31,7 @@
                 {% elif label == 1 %}
                     <div>考试正在进行，请耐心等候</div>
                 {% elif label == 2 %}
-                    <a href="{{ url_for('teacher.show_exam', paper_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:150pt;" target="_blank">查看考试结果</a>
+                    <a href="{{ url_for('.show_exam', paper_id=exam.paper_id) }}" class="btn bg-primary text-light btn-lg lift" style="width:150pt;">查看考试结果</a>
                     <div class="row clearfix g-3"  style="margin-top:10pt;">
                     <div class="col-sm-12">
                         <div class="card mb-3">

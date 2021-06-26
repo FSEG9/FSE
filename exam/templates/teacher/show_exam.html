@@ -23,7 +23,7 @@
         </div>
     </div>
 
-<div>
+<span>
     <br />
     {% for probanls in exam.probanls %}
         {% if probanls.problem.type == 0 %}
@@ -35,39 +35,59 @@
                 <div style="float:left;">F</div><div style="float: right">选择人数：{{ probanls.F_count }}</div>
                 <br>
                 <br>
-                <div style="background-color:#eee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">正确答案：{{ probanls.problem.solution }}<br />正确率：{{ probanls.accuracy }}</p></div>
+                <div style="background-color:#eee;padding:4pt;border-radius:4px;border:5px"><p style="margin-bottom: 0px">正确答案：{{ probanls.problem.solution }}<br />正确率：{{ probanls.accuracy }}</p></div>
                 </div>
             </div>
         {% elif probanls.problem.type == 1 %}
             <div class="card bg-light " style="margin-bottom: 10pt;">
                 <div class="card-body justify-content-between ">
                 <p>{{loop.index}}.<span class="text-muted">[单选]</span>{{probanls.problem.text}}<span class="text-muted">(1分)</span></p>
-                    <div style="float:left;">A. {{probanls.problem.choice_A}}</div><div  style="float: right">选择人数：{{ probanls.A_count }}</div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10">A. {{probanls.problem.choice_A}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.A_count }}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">B. {{probanls.problem.choice_B}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.B_count }}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">C. {{probanls.problem.choice_C}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.C_count }}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">D. {{probanls.problem.choice_D}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.D_count }}</span></div>
+                        </div>
+                    </div>
                     <br>
-                    <div style="float:left;">B. {{probanls.problem.choice_B}}</div><div  style="float: right">选择人数：{{ probanls.B_count }}</div>
-                    <br>
-                    <div style="float:left;">C. {{probanls.problem.choice_C}}</div><div  style="float: right">选择人数：{{ probanls.C_count }}</div>
-                    <br>
-                    <div style="float:left;">D. {{probanls.problem.choice_D}}</div><div  style="float: right">选择人数：{{ probanls.D_count }}</div>
-                    <br>
-                    <br>
-                    <div style="background-color:#eee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">正确答案：{{ probanls.problem.solution }}<br />正确率：{{ probanls.accuracy }}</p></div>
+                    <div style="background-color:#eee;padding:4pt;border-radius:4px;border:5px"><p style="margin-bottom: 0px">正确答案：{{ probanls.problem.solution }}<br />正确率：{{ probanls.accuracy }}</p></div>
                 </div>
             </div>
         {% else %}
             <div class="card bg-light " style="margin-bottom: 10pt;">
                 <div class="card-body justify-content-between ">
                 <p>{{ loop.index}}.<span class="text-muted">[多选]</span>{{probanls.problem.text}}<span class="text-muted">(1分)</span></p>
-                    <div style="float:left;">A. {{probanls.problem.choice_A}}</div><div  style="float: right">选择人数：{{ probanls.A_count }}</div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10">A. {{probanls.problem.choice_A}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.A_count }}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">B. {{probanls.problem.choice_B}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.B_count }}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">C. {{probanls.problem.choice_C}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.C_count }}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">D. {{probanls.problem.choice_D}}</div>
+                            <div class="col-md-2"><span class="pull-right">选择人数：{{ probanls.D_count }}</span></div>
+                        </div>
+                    </div>
                     <br>
-                    <div style="float:left;">B. {{probanls.problem.choice_B}}</div><div  style="float: right">选择人数：{{ probanls.B_count }}</div>
-                    <br>
-                    <div style="float:left;">C. {{probanls.problem.choice_C}}</div><div  style="float: right">选择人数：{{ probanls.C_count }}</div>
-                    <br>
-                    <div style="float:left;">D. {{probanls.problem.choice_D}}</div><div  style="float: right">选择人数：{{ probanls.D_count }}</div>
-                    <br>
-                    <br>
-                    <div style="background-color:#eee;padding:4pt;border-radius:4px;"><p style="margin-bottom: 0px">正确答案：{{ probanls.problem.solution }}<br />正确率：{{ probanls.accuracy }}</p></div>
+                    <div style="background-color:#eee;padding:4pt;border-radius:4px;border:5px"><p style="margin-bottom: 0px">正确答案：{{ probanls.problem.solution }}<br />正确率：{{ probanls.accuracy }}</p></div>
                 </div>
             </div>
         {% endif %}
