@@ -49,6 +49,9 @@ def paper_has_pro(chosen_proid):
         if request.form.get('cancel'):
             print("取消")
             return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
+        if request.form.get('clear'):
+            chosen_proid = [0,0]
+            return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         if request.form.get('gen_exam'):
             print("提交生成测试")
             if request.method == 'POST':
@@ -105,6 +108,8 @@ def paper_has_pro(chosen_proid):
                 if problem.type == chosen_type:
                     i = i + 1
                     chosen_proid.append(problem.problem_id)
+            if i<num-1:
+                flash('题目数量不足 仅加入'+str(i)+'道题')
             return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
         else:
             print("删除题目")
