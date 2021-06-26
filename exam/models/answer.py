@@ -13,8 +13,8 @@ class Anspaper(db.Model):
     paper_id = db.Column(db.Integer, db.ForeignKey('paper.paper_id',ondelete='CASCADE'))
     student_id = db.Column(db.Integer)
     score_all = db.Column(db.Integer)
+    Ranknum = db.Column(db.Integer, default=0)
     Answers = db.relationship("Anspa_prob_answer", lazy='dynamic')
-
 
 class Anspa_prob_answer(db.Model):
     anspaper_id = db.Column(db.Integer, db.ForeignKey('anspaper.anspaper_id',ondelete='CASCADE'), nullable=False, primary_key=True)
