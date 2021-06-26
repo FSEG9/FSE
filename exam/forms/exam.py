@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, DateField, BooleanField
 from wtforms.validators import DataRequired, Length
 
+
 def check_has_number(message=None):
     """验证器：若为单选或多选，选项不能为空"""
     if message is None:
