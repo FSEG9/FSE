@@ -46,6 +46,18 @@ PyPI (pip) 换源：
 flask initdb --drop
 ```
 
+添加随机试题：
+
+```bash
+flask forge-problems [--count 20]
+```
+
+添加随机考试：
+
+```bash
+flask forge-papers [--count 20] [--min-problem 5]
+```
+
 ## 网页目录结构
 
 ```bash
