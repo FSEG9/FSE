@@ -78,7 +78,7 @@ def paper_has_pro(chosen_proid):
                     db.session.commit()
 
                     flash('生成成功')
-                    chosen_proid = []
+                    chosen_proid = [0,0]
                     return redirect(url_for('manage_exam.paper_has_pro', chosen_proid=chosen_proid))
                 else:
                     flash('请填入完整信息')
