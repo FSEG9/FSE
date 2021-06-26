@@ -5,7 +5,12 @@
 {% block content %}
     <div class="body d-flex py-lg-3 py-md-2">
             <div class="container-xxl">
-
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-info alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
                 <div class="row align-items-center">
                     <div class="border-0 mb-4">
                         <div class="card-header no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
