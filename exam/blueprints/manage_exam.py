@@ -1,3 +1,4 @@
+"""教师管理考试的相关视图函数"""
 import ast
 import re
 

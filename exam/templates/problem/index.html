@@ -65,6 +65,7 @@
                                                 {{ problem.papers | length }}
                                             </td>
                                             <td>
+
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button problem-id="{{ problem.problem_id }}" class="btn btn-outline-secondary problem-edit"><i class="icofont-edit text-success"></i></button>
                                                     {% if problem.papers | length == 0 %}
@@ -75,6 +76,7 @@
                                                         <button class="btn btn-outline-secondary" onclick="return alert('该题已与试卷绑定，无法删除。')"><i class="icofont-ui-delete text-muted"></i></button>
                                                     {% endif %}
                                                 </div>
+
                                             </td>
                                         </tr>
                                     {% endfor %}

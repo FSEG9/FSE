@@ -33,20 +33,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {% if not problems %}
-                                    <tr>
-                                        <td colspan="6">无题目</td>
-                                    </tr>
-                                {% else %}
                                     {% for problem in problems %}
                                         {% include 'exam_view/_problem.html' %}
                                     {% endfor %}
-                                {% endif %}
                                 </tbody>
                             </table>
                             <div class="col-auto d-flex w-sm-100">
                                     <input class="btn btn-dark btn-set-task w-sm-100" type="submit" name="submit" value="导入题目">
-
                             </div>
                         </div>
                     </div>

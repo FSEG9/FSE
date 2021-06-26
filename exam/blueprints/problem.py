@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from exam import db
 from exam.forms.problem import ProblemForm
 from exam.models.problem import Problem, Tag

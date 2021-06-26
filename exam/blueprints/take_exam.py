@@ -1,3 +1,4 @@
+"""学生参加考试的相关视图函数"""
 from flask import Blueprint
 from flask import render_template, request, url_for, redirect, flash
 
@@ -13,7 +14,7 @@ take_exam_bp = Blueprint('take_exam', __name__)
 
 @take_exam_bp.route('/', methods=['GET', 'POST'])
 def home():
-    return '没用的界面'
+    return redirect(url_for('view_exam.home'))
 
 
 @take_exam_bp.route('/<int:exam_id>', methods=['GET', 'POST'])
@@ -63,7 +64,7 @@ def take_exam(exam_id):
 def show_exam(exam_id):
     paper = Paper.query.filter_by(paper_id=exam_id).first()
     problems = Paper.query.filter_by(paper_id=exam_id).first().problems
-    answerpaper = Anspaper.query.filter_by(paper_id=paper.paper_id).first() #有学生id之后再改
+    answerpaper = Anspaper.query.filter_by(paper_id=paper.paper_id).first()  # TODO: 有学生id之后再改
     print(type(answerpaper.Answers))
     for problem in problems:
         answer = answerpaper.Answers.filter_by(problem_id=problem.problem_id).first().answer

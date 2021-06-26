@@ -11,10 +11,10 @@
             <span class="badge bg-success">{{ tag.tag_name }}</span>
         {% endfor %}
     </td>
-    <td>0</td> {# TODO: 添加引用次数 #}
+    <td>{{ problem.papers | length }}</td>
     <td>
         <span class="item-body">
-            <input id="chosen_pro" type="checkbox" name="{{ problem.problem_id }}" value="{{ problem.problem_id }}" />
+            <input id="choose-{{ problem.problem_id }}" type="checkbox" name="{{ problem.problem_id }}" value="{{ problem.problem_id }}" />
         </span>
     </td>
 </tr>
