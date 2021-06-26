@@ -17,9 +17,9 @@ class Paper(db.Model):
     subject = db.Column(db.String(40), nullable=False)
     strt_t = db.Column(db.DateTime, default=datetime.now, nullable=False)
     end_t = db.Column(db.DateTime, nullable=False)
-    end = db.Column(db.Boolean,  default=False)
-    score = db.Column(db.Float, default=-1)
-    anlsflag = db.Column(db.Boolean, default=False)
+    end = db.Column(db.Boolean,  default=False)  # 是否已经结束
+    score = db.Column(db.Float, default=-1)  # 平均分
+    anlsflag = db.Column(db.Boolean, default=False)  # 是否已经分析
     problems = db.relationship('Problem',
                                secondary=exam_has_problem,
                                back_populates='papers')
